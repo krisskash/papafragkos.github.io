@@ -1,0 +1,39 @@
+/* PS3 Wave Animation Styles */
+.wave-cloth {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Use viewport width */
+    height: 100vh; /* Use viewport height */
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none; /* Ensure it doesn't interfere with interactions */
+}
+
+/* Frutiger Aero colors - define the palette */
+:root {
+    --frutiger-blue-light: rgba(0, 170, 255, 0.7);
+    --frutiger-blue-medium: rgba(0, 135, 204, 0.6);
+    --frutiger-blue-dark: rgba(0, 85, 153, 0.7);
+    --frutiger-teal: rgba(0, 190, 190, 0.5);
+    --frutiger-aqua: rgba(75, 210, 230, 0.6);
+}
+
+/* Frutiger Aero gradient overlay for wave effect */
+.wave-cloth::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        var(--frutiger-blue-light),
+        var(--frutiger-blue-medium),
+        var(--frutiger-blue-dark),
+        var(--frutiger-teal)
+    );
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.5; /* Reduced opacity for better visibility */
+}

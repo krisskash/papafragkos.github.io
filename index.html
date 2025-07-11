@@ -1,150 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+<head>    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Website</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Thanks for visiting!</title>    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ps3waves.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <h1>Your Name</h1>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="#home" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#about" class="nav-link">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#projects" class="nav-link">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#contact" class="nav-link">Contact</a>
-                    </li>
-                </ul>
-                <div class="nav-toggle">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
+<body>    <!-- Background Video -->    <video autoplay muted loop playsinline class="background-video">
+        <!-- <source src="background-video.mp4.mp4" type="video/mp4"> -->
+        <!-- Fallback for browsers that don't support video -->
+        <div class="animated-bg-overlay"></div>
+    </video><!-- PS3 XMB-style Wave Animation -->
+    <div class="wave-cloth"></div>
+    
+<nav class="glass-nav"><div class="nav-container">
+            <div class="nav-brand white-glow" data-en="Christos Papafragkos" data-gr="Χρήστος Παπαφράγκος">Christos Papafragkos</div>            <div class="nav-links"><a href="#home" class="nav-link" data-en="Home" data-gr="Αρχική">Home</a>
+                <a href="#about" class="nav-link" data-en="About" data-gr="Σχετικά">About</a>
+                <a href="#projects" class="nav-link" data-en="Projects" data-gr="Έργα">Projects</a>
+                <a href="#contact" class="nav-link" data-en="Contact" data-gr="Επικοινωνία">Contact</a>
+            </div>            <div class="language-selector">
+                <button class="language-btn" id="languageBtn" onclick="toggleLanguageDropdown()">
+                    <span class="language-icon">🌐</span>
+                    <span class="language-text">EN</span>
+                    <span class="language-arrow">▼</span>
+                </button>                <div class="language-dropdown" id="languageDropdown">
+                    <button class="language-option" data-lang="en" onclick="changeLanguage('en')">
+                        <span class="flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="language-option" data-lang="gr" onclick="changeLanguage('gr')">
+                        <span class="flag">🇬🇷</span>
+                        <span>Ελληνικά</span>
+                    </button>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <main>
-        <section id="home" class="hero">
+    <main>        <section id="home" class="hero">
             <div class="hero-container">
-                <h1 class="hero-title">Hello, I'm <span class="highlight">Your Name</span></h1>
-                <p class="hero-subtitle">Welcome to my personal website</p>
-                <p class="hero-description">
-                    I'm a passionate developer creating amazing web experiences. 
-                    This is my space to share my work, thoughts, and journey.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                <div class="hero-profile">
+                    <img src="profile-picture.jpg" alt="Your Name" class="hero-avatar">                </div>                <h1 class="hero-title">
+                    <span data-en="Hello, I'm" data-gr="Γεια σας, είμαι ο">Hello, I'm</span> <span class="highlight white-glow" data-en="Christos" data-gr="Χρήστος">Christos</span>
+                </h1>
+                <p class="hero-subtitle" data-en="Welcome to my personal website" data-gr="Καλώς ήρθατε στην προσωπική μου ιστοσελίδα">Welcome to my personal website</p>
+                <p class="hero-description" data-en="Where creativity meets technology. I'm passionate about crafting beautiful, functional experiences that make a difference." data-gr="Οπου η δημιουργικότητα συναντά την τεχνολογία. Είμαι αφοσιωμένος με τη δημιουργία όμορφων, λειτουργικών εμπειριών που κάνουν τη διαφορά.">
+                    Where creativity meets technology. 
+                    I'm passionate about crafting beautiful, functional experiences that make a difference.
+                </p>                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary" data-en="View My Work" data-gr="Δείτε τη Δουλειά μου">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary" data-en="Get In Touch" data-gr="Επικοινωνήστε">Get In Touch</a>
                 </div>
             </div>
-        </section>
-
-        <section id="about" class="about">
+        </section>        <section id="about" class="about">
             <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>
-                            I'm a web developer with a passion for creating beautiful and functional websites. 
-                            I love working with modern technologies and constantly learning new things.
-                        </p>
-                        <p>
-                            When I'm not coding, you can find me exploring new technologies, reading about 
-                            web development trends, or working on personal projects.
+                <h2 class="section-title" data-en="About Me" data-gr="Σχετικά με Εμενα">About Me</h2>                <div class="about-content">                    <div class="about-profile">
+                        <div class="about-picture-frame">
+                            <!-- Using a placeholder alt image until you add your preferred image -->
+                            <div class="about-avatar-placeholder">
+                                <div class="placeholder-content">
+                                    <span class="placeholder-icon">📸</span>
+                                    <span class="placeholder-text">Your Photo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-text"><p data-en="Computer Science student passionate about clean design and smooth user experiences. I combine technical & practical expertise with aesthetic sensibility to create intuitive digital solutions. When I'm not coding, I'm gaming.😎" data-gr="Μαθήτης Επιστήμης Υπολογιστών με πάθος για καθαρό σχεδιασμό για ομαλές εμπειρίες χρήστη. Συνδυάζω τεχνική & πρακτική εμπειρία με αισθητική για ψηφιακές λύσεις. Όταν δεν προγραμματίζω, παίζω βιντεοπαιχνίδια.😎">
+                            Computer Science student passionate about clean design and smooth user experiences. 
+                            I combine technical & practical expertise with aesthetic sensibility to create intuitive digital solutions. When I'm not coding, I'm gaming.
                         </p>
                     </div>
-                    <div class="skills">
-                        <h3>Skills</h3>
-                        <div class="skills-grid">
+                    <div class="skills">                        <h3 data-en="Skills" data-gr="Δεξιότητες">Skills</h3>                        <div class="skills-grid">
                             <div class="skill-item">HTML5</div>
                             <div class="skill-item">CSS3</div>
                             <div class="skill-item">JavaScript</div>
-                            <div class="skill-item">React</div>
                             <div class="skill-item">Node.js</div>
+                            <div class="skill-item">Java</div>
+                            <div class="skill-item">MySQL</div>
+                            <div class="skill-item">AI Techniques</div>
                             <div class="skill-item">Git</div>
+                            <div class="skill-item">UI/UX</div>
+                            <div class="skill-item">MongoDB</div>
+                            <div class="skill-item">Haskell</div>
+                            <div class="skill-item">Python</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <section id="projects" class="projects">
+        </section>        <section id="projects" class="projects">
             <div class="container">
-                <h2 class="section-title">My Projects</h2>
-                <div class="projects-grid">
+                <h2 class="section-title" data-en="My Projects" data-gr="Τα Έργα μου">My Projects</h2>                <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-image">
                             <div class="project-placeholder">Project 1</div>
                         </div>
-                        <div class="project-content">
-                            <h3>Project One</h3>
-                            <p>A brief description of your first project. What technologies did you use? What problem does it solve?</p>
+                        <div class="project-content">                            <h3 data-en="Project One" data-gr="Έργο Ένα">Project One</h3>
+                            <p data-en="A brief description of my first project. What technologies did I use? What problem does it solve?" data-gr="Μια σύντομη περιγραφή του πρώτου μου έργου. Ποιες τεχνολογίες χρησιμοποιήσα; Τι πρόβλημα λύνει;">A brief description of your first project. What technologies did I use? What problem does it solve?</p>
                             <div class="project-links">
-                                <a href="#" class="project-link">View Project</a>
-                                <a href="#" class="project-link">GitHub</a>
+                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" target="_blank" rel="noopener noreferrer">View Project</a>
+                                <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
-                    </div>
-                    <div class="project-card">
+                    </div>                    <div class="project-card">
                         <div class="project-image">
                             <div class="project-placeholder">Project 2</div>
                         </div>
-                        <div class="project-content">
-                            <h3>Project Two</h3>
-                            <p>A brief description of your second project. What makes this project special or unique?</p>
+                        <div class="project-content">                            <h3 data-en="Project Two" data-gr="Έργο Δύο">Project Two</h3>
+                            <p data-en="A brief description of my second project. What makes this project special or unique?" data-gr="Μια σύντομη περιγραφή του δεύτερου μου έργου. Τι κάνει αυτό το έργο ξεχωριστό ή μοναδικό;">A brief description of your second project. What makes this project special or unique?</p>
                             <div class="project-links">
-                                <a href="#" class="project-link">View Project</a>
-                                <a href="#" class="project-link">GitHub</a>
+                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" target="_blank" rel="noopener noreferrer">View Project</a>
+                                <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
-                    </div>
-                    <div class="project-card">
+                    </div>                    <div class="project-card">
                         <div class="project-image">
                             <div class="project-placeholder">Project 3</div>
                         </div>
-                        <div class="project-content">
-                            <h3>Project Three</h3>
-                            <p>A brief description of your third project. What did you learn while building this?</p>
+                        <div class="project-content">                            <h3 data-en="Project Three" data-gr="Έργο Τρία">Project Three</h3>
+                            <p data-en="A brief description of your third project. What did I learn while building this?" data-gr="Μια σύντομη περιγραφή του τρίτου μου έργου. Τι έμαθα κατά τη δημιουργία αυτού;">A brief description of my third project. What did you learn while building this?</p>
                             <div class="project-links">
-                                <a href="#" class="project-link">View Project</a>
-                                <a href="#" class="project-link">GitHub</a>
+                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" target="_blank" rel="noopener noreferrer">View Project</a>
+                                <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <section id="contact" class="contact">
+        </section>        <section id="contact" class="contact">
             <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="contact-content">
-                    <p>I'd love to hear from you! Whether you have a question, want to collaborate, or just want to say hi.</p>
-                    <div class="contact-info">
-                        <a href="mailto:your.email@example.com" class="contact-link">
-                            <span class="contact-icon">📧</span>
-                            your.email@example.com
+                <h2 class="section-title" data-en="Get In Touch" data-gr="Επικοινωνήστε">Get In Touch</h2>                <div class="contact-content">
+                    <p data-en="I'd love to hear from you! Whether you have a question, want to collaborate, or just want to say hi." data-gr="Θα χαρώ να ακούσω από εσάς! Είτε έχετε μια ερώτηση, θέλετε να συνεργαστείτε, ή απλά θέλετε να πείτε γεια.">I'd love to hear from you! Whether you have a question, want to collaborate, or just want to say hi.</p><div class="contact-info">                        <a href="mailto:papafragos24@gmail.com" class="contact-link" target="_blank" rel="noopener noreferrer">
+                            <span class="contact-icon">✉️</span>
+                            <span data-en="Email" data-gr="Email">Email</span>
                         </a>
-                        <a href="https://github.com/yourusername" class="contact-link">
-                            <span class="contact-icon">🐙</span>
+                        <a href="https://github.com/krisskash" class="contact-link" target="_blank" rel="noopener noreferrer">
+                            <span class="contact-icon">🖥️</span>
                             GitHub
                         </a>
-                        <a href="https://linkedin.com/in/yourprofile" class="contact-link">
-                            <span class="contact-icon">💼</span>
+                        <a href="https://www.linkedin.com/in/christos-papafragkos-454663292/" class="contact-link" target="_blank" rel="noopener noreferrer">
+                            <span class="contact-icon">👥</span>
                             LinkedIn
                         </a>
                     </div>
@@ -155,10 +149,10 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Your Name. All rights reserved.</p>
+            <p>&copy; 2025 Christos Papafragkos. All rights reserved.</p>
         </div>
-    </footer>
-
+    </footer>    <script src="language.js"></script>
     <script src="script.js"></script>
+    <script type="module" src="ps3waves.js"></script>
 </body>
 </html>

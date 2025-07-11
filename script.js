@@ -1,51 +1,105 @@
-// Mobile Navigation Toggle
+// Mobile Navigation Toggle with Glass Effect
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
+const navOverlay = document.createElement('div');
+navOverlay.className = 'nav-overlay';
+document.body.appendChild(navOverlay);
 
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (navMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    });
+}
 
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+        navOverlay.classList.remove('active');
+        document.body.style.overflow = '';
     });
 });
 
-// Smooth scrolling for navigation links
+// Close mobile menu when clicking on overlay
+navOverlay.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+    navToggle.classList.remove('active');
+    navOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// Close mobile menu on window resize
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+        navOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
+// Enhanced navigation links - removed smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
+        
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            // Simple scroll to target without smooth behavior
+            const navHeight = document.querySelector('.glass-nav').offsetHeight;
+            const targetPosition = target.offsetTop - navHeight - 20;
+            window.scrollTo(0, targetPosition);
         }
     });
 });
 
 // Add active class to navigation links based on scroll position
+let scrollTimeout;
 window.addEventListener('scroll', () => {
-    let current = '';
-    const sections = document.querySelectorAll('section');
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
+    // Debounce scroll events to prevent rapid state changes
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        let current = '';
+        const sections = document.querySelectorAll('section');
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            // Improved detection with better offset calculation
+            if (pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
 
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-            link.classList.add('active');
+        // Default to 'home' if at the top of the page or no section detected
+        if (pageYOffset < 200 || !current) {
+            current = 'home';
         }
-    });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === '#' + current) {
+                if (!link.classList.contains('active')) {
+                    link.classList.add('active');
+                }
+            } else {
+                if (link.classList.contains('active')) {
+                    link.classList.remove('active');
+                }
+            }
+        });
+    }, 50); // 50ms debounce
 });
 
 // Intersection Observer for animations
@@ -62,18 +116,6 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, observerOptions);
-
-// Observe elements for animation
-document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.project-card, .skill-item, .about-text');
-    
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-        observer.observe(el);
-    });
-});
 
 // Add some interactivity to skill items
 document.querySelectorAll('.skill-item').forEach(item => {
@@ -109,12 +151,9 @@ function typeWriter(element, text, speed = 100) {
 //     typeWriter(heroTitle, originalText, 100);
 // });
 
-// Add scroll-to-top functionality
+// Simple scroll-to-top functionality
 const scrollToTop = () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+    window.scrollTo(0, 0);
 };
 
 // Create scroll-to-top button
@@ -155,5 +194,27 @@ const createScrollToTopButton = () => {
     });
 };
 
-// Initialize scroll-to-top button
-document.addEventListener('DOMContentLoaded', createScrollToTopButton);
+// Initialize everything when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Main script loaded');
+    
+    // Initialize animations
+    const animatedElements = document.querySelectorAll('.project-card, .skill-item, .about-text');
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(el);
+    });
+
+    // Set initial active state for home link
+    const homeLink = document.querySelector('a[href="#home"]');
+    if (homeLink && window.pageYOffset < 200) {
+        homeLink.classList.add('active');
+    }
+
+    // Initialize scroll-to-top button
+    createScrollToTopButton();
+    
+    console.log('Main script initialization complete');
+});
