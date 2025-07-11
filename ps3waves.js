@@ -143,14 +143,29 @@ const getNormalizedMousePos = (e) => {
   };
 };
 
-class WaveBackground {  constructor(selector) {
+class WaveBackground {
+  constructor(selector) {
     this.container = document.querySelector(selector);
     this.clock = new THREE.Clock();
     this.scene = new THREE.Scene();    
-    this.cameraPosition = new THREE.Vector3(0, 0.25, 2); // Shifted camera up to view lower part of scene
-    this.lookAtPoint = new THREE.Vector3(0, 0.25, 0); // Look at a point above center to show waves lower
+    this.cameraPosition = new THREE.Vector3(0, 0.25, 2);
+    this.lookAtPoint = new THREE.Vector3(0, 0.25, 0);
+    
+    // Performance optimization flags
+    this.isLowPowerMode = this.checkLowPowerMode();
+    this.frameCount = 0;
+    this.targetFPS = 60;
+    this.fpsInterval = 1000 / this.targetFPS;
+    this.lastTime = performance.now();
     
     this.init();
+  }
+  
+  checkLowPowerMode() {
+    // Check for mobile devices or low-end hardware
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isLowEnd = navigator.hardwareConcurrency <= 4;
+    return isMobile || isLowEnd;
   }
   
   init() {
@@ -160,30 +175,37 @@ class WaveBackground {  constructor(selector) {
     this.createPlane();
     this.addListeners();
     this.setLoop();
-  }  createOrthographicCamera() {
+  }
+
+  createOrthographicCamera() {
     const aspect = calcAspect(this.container);
-    const zoom = 0.5; // Lower zoom value to make waves appear larger
+    const zoom = 0.5;
     const camera = new THREE.OrthographicCamera(
       -zoom * aspect,
       zoom * aspect,
       zoom,
       -zoom,
       -100,
-      1000    );
+      1000
+    );
     camera.position.copy(this.cameraPosition);
-    camera.lookAt(this.lookAtPoint); // Look at the lower point
+    camera.lookAt(this.lookAtPoint);
     this.camera = camera;
-  }  createRenderer() {
+  }
+
+  createRenderer() {
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: true
+      antialias: !this.isLowPowerMode, // Disable antialiasing on low-end devices
+      powerPreference: "high-performance"
     });
     
-    // Set renderer size to window dimensions for full coverage
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0);
     
-    // Style the canvas to ensure it completely fills the viewport
+    // Optimize renderer settings
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap pixel ratio
+    
     const canvas = renderer.domElement;
     canvas.style.position = 'fixed';
     canvas.style.left = '0';
@@ -236,8 +258,9 @@ class WaveBackground {  constructor(selector) {
     });
     this.waveClothMaterial = waveClothMaterial;
   }  createPlane() {
-    // Using a much larger plane geometry to ensure full coverage
-    const geometry = new THREE.PlaneBufferGeometry(10, 10, 128, 128);
+    // Optimize geometry complexity based on device capability
+    const segments = this.isLowPowerMode ? 64 : 128;
+    const geometry = new THREE.PlaneBufferGeometry(10, 10, segments, segments);
     const material = this.waveClothMaterial;
     const plane = new THREE.Mesh(geometry, material);
     this.scene.add(plane);
@@ -245,33 +268,42 @@ class WaveBackground {  constructor(selector) {
   }
 
   addListeners() {
+    // Throttled resize handler
+    let resizeTimeout;
     window.addEventListener("resize", () => {
-      if (this.waveClothMaterial) {
-        this.waveClothMaterial.uniforms.uResolution.value.x = window.innerWidth;
-        this.waveClothMaterial.uniforms.uResolution.value.y = window.innerHeight;
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (this.waveClothMaterial) {
+          this.waveClothMaterial.uniforms.uResolution.value.x = window.innerWidth;
+          this.waveClothMaterial.uniforms.uResolution.value.y = window.innerHeight;
+          this.renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        const aspect = calcAspect(this.container);
+        const camera = this.camera;
+        const zoom = 0.5;
+        
+        camera.left = -zoom * aspect;
+        camera.right = zoom * aspect;
+        camera.top = zoom;
+        camera.bottom = -zoom;
+        camera.updateProjectionMatrix();
+        camera.lookAt(this.lookAtPoint);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-      }      const aspect = calcAspect(this.container);
-      const camera = this.camera;
-      const zoom = 0.5; // Match the same zoom as in createOrthographicCamera
-      
-      camera.left = -zoom * aspect;
-      camera.right = zoom * aspect;      camera.top = zoom;
-      camera.bottom = -zoom;
-      camera.updateProjectionMatrix();
-      camera.lookAt(this.lookAtPoint); // Ensure camera keeps looking at the lower point after resize
-        this.renderer.setSize(
-        window.innerWidth,
-        window.innerHeight
-      );
+      }, 100); // Debounce resize events
     });
     
-    // Track mouse movement for wave interaction
+    // Throttled mouse movement for wave interaction
+    let mouseTimeout;
     window.addEventListener("mousemove", (e) => {
-      if (this.waveClothMaterial) {
-        const { x, y } = getNormalizedMousePos(e);
-        this.waveClothMaterial.uniforms.uMouse.value.x = x;
-        this.waveClothMaterial.uniforms.uMouse.value.y = y;
-      }
+      clearTimeout(mouseTimeout);
+      mouseTimeout = setTimeout(() => {
+        if (this.waveClothMaterial) {
+          const { x, y } = getNormalizedMousePos(e);
+          this.waveClothMaterial.uniforms.uMouse.value.x = x;
+          this.waveClothMaterial.uniforms.uMouse.value.y = y;
+        }
+      }, 16); // ~60fps throttle
     });
   }
 
@@ -283,10 +315,17 @@ class WaveBackground {  constructor(selector) {
   }
 
   setLoop() {
-    this.renderer.setAnimationLoop(() => {
-      this.resizeRendererToDisplaySize();
-      this.update();
-      this.renderer.render(this.scene, this.camera);
+    // Optimized render loop with FPS control
+    this.renderer.setAnimationLoop((currentTime) => {
+      // FPS limiting for better performance
+      const deltaTime = currentTime - this.lastTime;
+      
+      if (deltaTime >= this.fpsInterval) {
+        this.resizeRendererToDisplaySize();
+        this.update();
+        this.renderer.render(this.scene, this.camera);
+        this.lastTime = currentTime - (deltaTime % this.fpsInterval);
+      }
     });
   }
 }

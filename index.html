@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>    <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanks for visiting!</title>    <link rel="stylesheet" href="styles.css">
+    <title>Thanks for visiting!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="ps3waves.css">
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>    <!-- Background Video -->    <video autoplay muted loop playsinline class="background-video">
-        <!-- <source src="background-video.mp4.mp4" type="video/mp4"> -->
-        <!-- Fallback for browsers that don't support video -->
-        <div class="animated-bg-overlay"></div>
-    </video><!-- PS3 XMB-style Wave Animation -->
+<body>
+    <!-- PS3 XMB-style Wave Animation -->
     <div class="wave-cloth"></div>
     
-<nav class="glass-nav"><div class="nav-container">
-            <div class="nav-brand white-glow" data-en="Christos Papafragkos" data-gr="Χρήστος Παπαφράγκος">Christos Papafragkos</div>            <div class="nav-links"><a href="#home" class="nav-link" data-en="Home" data-gr="Αρχική">Home</a>
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <div class="nav-brand white-glow" data-en="Christos Papafragkos" data-gr="Χρήστος Παπαφράγκος">Christos Papafragkos</div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link" data-en="Home" data-gr="Αρχική">Home</a>
                 <a href="#about" class="nav-link" data-en="About" data-gr="Σχετικά">About</a>
                 <a href="#projects" class="nav-link" data-en="Projects" data-gr="Έργα">Projects</a>
                 <a href="#contact" class="nav-link" data-en="Contact" data-gr="Επικοινωνία">Contact</a>
-            </div>            <div class="language-selector">
+            </div>
+            <div class="language-selector">
                 <button class="language-btn" id="languageBtn" onclick="toggleLanguageDropdown()">
                     <span class="language-icon">🌐</span>
                     <span class="language-text">EN</span>
                     <span class="language-arrow">▼</span>
-                </button>                <div class="language-dropdown" id="languageDropdown">
+                </button>
+                <div class="language-dropdown" id="languageDropdown">
                     <button class="language-option" data-lang="en" onclick="changeLanguage('en')">
                         <span class="flag">🇬🇧</span>
                         <span>English</span>
@@ -37,40 +43,47 @@
         </div>
     </nav>
 
-    <main>        <section id="home" class="hero">
+    <main>
+        <section id="home" class="hero">
             <div class="hero-container">
                 <div class="hero-profile">
-                    <img src="profile-picture.jpg" alt="Your Name" class="hero-avatar">                </div>                <h1 class="hero-title">
-                    <span data-en="Hello, I'm" data-gr="Γεια σας, είμαι ο">Hello, I'm</span> <span class="highlight white-glow" data-en="Christos" data-gr="Χρήστος">Christos</span>
+                    <img src="profile-picture.jpg" alt="Christos Papafragkos" class="hero-avatar" loading="lazy">
+                </div>
+                <h1 class="hero-title">
+                    <span data-en="Hello, I'm" data-gr="Γεια σας, είμαι ο">Hello, I'm</span> 
+                    <span class="highlight white-glow" data-en="Christos" data-gr="Χρήστος">Christos</span>
                 </h1>
                 <p class="hero-subtitle" data-en="Welcome to my personal website" data-gr="Καλώς ήρθατε στην προσωπική μου ιστοσελίδα">Welcome to my personal website</p>
-                <p class="hero-description" data-en="Where creativity meets technology. I'm passionate about crafting beautiful, functional experiences that make a difference." data-gr="Οπου η δημιουργικότητα συναντά την τεχνολογία. Είμαι αφοσιωμένος με τη δημιουργία όμορφων, λειτουργικών εμπειριών που κάνουν τη διαφορά.">
+                <p class="hero-description" data-en="Developing intuitive software while continuously leveling up my skills." data-gr="Αναπτύσσω εύχρηστο λογισμικό, βελτιώνοντας παράλληλα και τις δεξιότητές μου.">
                     Where creativity meets technology. 
                     I'm passionate about crafting beautiful, functional experiences that make a difference.
-                </p>                <div class="hero-buttons">
+                </p>
+                <div class="hero-buttons">
                     <a href="#projects" class="btn btn-primary" data-en="View My Work" data-gr="Δείτε τη Δουλειά μου">View My Work</a>
                     <a href="#contact" class="btn btn-secondary" data-en="Get In Touch" data-gr="Επικοινωνήστε">Get In Touch</a>
                 </div>
             </div>
-        </section>        <section id="about" class="about">
+        </section>
+
+        <section id="about" class="about">
             <div class="container">
-                <h2 class="section-title" data-en="About Me" data-gr="Σχετικά με Εμενα">About Me</h2>                <div class="about-content">                    <div class="about-profile">
+                <h2 class="section-title" data-en="About Me" data-gr="Σχετικά με Εμενα">About Me</h2>
+                <div class="about-content">
+                    <div class="about-profile">
                         <div class="about-picture-frame">
-                            <!-- Using a placeholder alt image until you add your preferred image -->
-                            <div class="about-avatar-placeholder">
-                                <div class="placeholder-content">
-                                    <span class="placeholder-icon">📸</span>
-                                    <span class="placeholder-text">Your Photo</span>
-                                </div>
-                            </div>
+                            <img src="about-picture.jpg" alt="Christos Papafragkos" class="about-profile-image" loading="lazy">
                         </div>
                     </div>
-                    <div class="about-text"><p data-en="Computer Science student passionate about clean design and smooth user experiences. I combine technical & practical expertise with aesthetic sensibility to create intuitive digital solutions. When I'm not coding, I'm gaming.😎" data-gr="Μαθήτης Επιστήμης Υπολογιστών με πάθος για καθαρό σχεδιασμό για ομαλές εμπειρίες χρήστη. Συνδυάζω τεχνική & πρακτική εμπειρία με αισθητική για ψηφιακές λύσεις. Όταν δεν προγραμματίζω, παίζω βιντεοπαιχνίδια.😎">
-                            Computer Science student passionate about clean design and smooth user experiences. 
-                            I combine technical & practical expertise with aesthetic sensibility to create intuitive digital solutions. When I'm not coding, I'm gaming.
+                    <div class="about-text">
+                        <p data-en="Computer Science student from Eleusis, Greece, passionate about finding my way into the tech industry. I love programming and working on challenging projects that combine technical expertise with creative problem-solving. My goal is to create intuitive digital solutions that make a real impact. When I'm not coding, I'm gaming.😎" data-gr="Φοιτητής Επιστήμης Υπολογιστών από την Ελευσίνα, με πείσμα να βρω τη θέση μου στον κλάδο της τεχνολογίας. Αγαπώ τον προγραμματισμό και τη δουλειά σε προκλητικά projects που συνδυάζουν τεχνική εμπειρία με δημιουργική επίλυση προβλημάτων. Στόχος μου είναι να δημιουργώ διαισθητικές ψηφιακές λύσεις που κάνουν πραγματική διαφορά. Όταν δεν γράφω κώδικα, παίζω βιντεοπαιχνίδια.😎">
+                            Computer Science student from Eleusis, Greece, passionate about finding my way into the tech industry. 
+                            I love programming and working on challenging projects that combine technical expertise with creative problem-solving. 
+                            My goal is to create intuitive digital solutions that make a real impact. When I'm not coding, I'm gaming.
                         </p>
                     </div>
-                    <div class="skills">                        <h3 data-en="Skills" data-gr="Δεξιότητες">Skills</h3>                        <div class="skills-grid">
+                    <div class="skills">
+                        <h3 data-en="Skills" data-gr="Δεξιότητες">Skills</h3>
+                        <div class="skills-grid">
                             <div class="skill-item">HTML5</div>
                             <div class="skill-item">CSS3</div>
                             <div class="skill-item">JavaScript</div>
@@ -152,6 +165,55 @@
             <p>&copy; 2025 Christos Papafragkos. All rights reserved.</p>
         </div>
     </footer>    <script src="language.js"></script>
+    <script>
+        // Optimized navbar scroll handling with throttling
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.glass-nav');
+            let lastScrollTop = 0;
+            let ticking = false;
+            const threshold = 100;
+            
+            if (!navbar) {
+                console.error('Navbar not found');
+                return;
+            }
+            
+            // Initialize as visible
+            navbar.classList.add('nav-visible');
+            
+            function updateNavbar() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > threshold) {
+                    if (scrollTop > lastScrollTop) {
+                        // Scrolling down
+                        navbar.classList.remove('nav-visible');
+                        navbar.classList.add('nav-hidden');
+                    } else {
+                        // Scrolling up
+                        navbar.classList.remove('nav-hidden');
+                        navbar.classList.add('nav-visible');
+                    }
+                } else {
+                    // Near top
+                    navbar.classList.remove('nav-hidden');
+                    navbar.classList.add('nav-visible');
+                }
+                
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                ticking = false;
+            }
+            
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(updateNavbar);
+                    ticking = true;
+                }
+            }
+            
+            window.addEventListener('scroll', requestTick, { passive: true });
+        });
+    </script>
     <script src="script.js"></script>
     <script type="module" src="ps3waves.js"></script>
 </body>

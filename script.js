@@ -5,7 +5,55 @@ const navOverlay = document.createElement('div');
 navOverlay.className = 'nav-overlay';
 document.body.appendChild(navOverlay);
 
-if (navToggle) {
+// Check if mobile navigation elements exist
+const mobileNavExists = navToggle !== null && navMenu !== null;
+
+// Hide/Show Navigation on Scroll
+let lastScrollTop = 0;
+const navbar = document.querySelector('.glass-nav');
+const scrollThreshold = 100; // Only hide after scrolling 100px
+
+console.log('Navigation element found:', navbar);
+console.log('Initial navbar classes:', navbar ? navbar.className : 'No navbar found');
+
+// Initialize navbar as visible
+if (navbar) {
+    navbar.classList.add('nav-visible');
+    console.log('Added nav-visible class on load');
+}
+
+window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    console.log('Scroll position:', scrollTop, 'Threshold:', scrollThreshold, 'Last scroll:', lastScrollTop);
+    
+    // Only trigger after scrolling past threshold
+    if (scrollTop > scrollThreshold) {
+        if (scrollTop > lastScrollTop) {
+            // Scrolling down - hide navbar
+            console.log('SCROLLING DOWN - HIDING NAVBAR');
+            navbar.classList.add('nav-hidden');
+            navbar.classList.remove('nav-visible');
+            console.log('After hiding - classes:', navbar.className);
+        } else {
+            // Scrolling up - show navbar
+            console.log('SCROLLING UP - SHOWING NAVBAR');
+            navbar.classList.remove('nav-hidden');
+            navbar.classList.add('nav-visible');
+            console.log('After showing - classes:', navbar.className);
+        }
+    } else {
+        // At top of page - always show navbar
+        console.log('AT TOP - SHOWING NAVBAR');
+        navbar.classList.remove('nav-hidden');
+        navbar.classList.add('nav-visible');
+        console.log('At top - classes:', navbar.className);
+    }
+    
+    lastScrollTop = scrollTop;
+});
+
+if (mobileNavExists && navToggle) {
     navToggle.addEventListener('click', () => {
         navMenu.classList.toggle('active');
         navToggle.classList.toggle('active');
@@ -23,24 +71,18 @@ if (navToggle) {
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        navToggle.classList.remove('active');
-        navOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+        if (mobileNavExists) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     });
 });
 
 // Close mobile menu when clicking on overlay
 navOverlay.addEventListener('click', () => {
-    navMenu.classList.remove('active');
-    navToggle.classList.remove('active');
-    navOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-});
-
-// Close mobile menu on window resize
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
+    if (mobileNavExists) {
         navMenu.classList.remove('active');
         navToggle.classList.remove('active');
         navOverlay.classList.remove('active');
@@ -48,7 +90,17 @@ window.addEventListener('resize', () => {
     }
 });
 
-// Enhanced navigation links - removed smooth scrolling
+// Close mobile menu on window resize
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && mobileNavExists) {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+        navOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
+// Enhanced navigation links - improved scroll positioning
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -56,18 +108,64 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(targetId);
         
         if (target) {
-            // Simple scroll to target without smooth behavior
+            // Show navbar when clicking nav links
+            navbar.classList.remove('nav-hidden');
+            navbar.classList.add('nav-visible');
+            
+            // Calculate position to center the section in viewport
+            const windowHeight = window.innerHeight;
+            const targetHeight = target.offsetHeight;
             const navHeight = document.querySelector('.glass-nav').offsetHeight;
-            const targetPosition = target.offsetTop - navHeight - 20;
-            window.scrollTo(0, targetPosition);
+            
+            // Center the section: section top - (viewport height - section height) / 2
+            const centerOffset = (windowHeight - targetHeight) / 2;
+            
+            // Special case for home section - scroll to top
+            let targetPosition;
+            if (targetId === '#home') {
+                targetPosition = 0;
+            } else {
+                // For other sections, center them in the viewport
+                targetPosition = target.offsetTop - centerOffset;
+                
+                // Ensure we don't scroll too high (respect navbar)
+                targetPosition = Math.max(target.offsetTop - navHeight - 20, targetPosition);
+            }
+            
+            // Smooth scroll to target
+            window.scrollTo({
+                top: Math.max(0, targetPosition),
+                behavior: 'smooth'
+            });
         }
     });
 });
 
-// Add active class to navigation links based on scroll position
+// Add active class to navigation links and handle navbar visibility
 let scrollTimeout;
 window.addEventListener('scroll', () => {
-    // Debounce scroll events to prevent rapid state changes
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Navigation bar hide/show logic
+    if (scrollTop > scrollThreshold) {
+        if (scrollTop > lastScrollTop) {
+            // Scrolling down - hide navbar
+            navbar.classList.add('nav-hidden');
+            navbar.classList.remove('nav-visible');
+        } else {
+            // Scrolling up - show navbar
+            navbar.classList.remove('nav-hidden');
+            navbar.classList.add('nav-visible');
+        }
+    } else {
+        // At top of page - always show navbar
+        navbar.classList.remove('nav-hidden');
+        navbar.classList.add('nav-visible');
+    }
+    
+    lastScrollTop = scrollTop;
+    
+    // Debounce scroll events to prevent rapid state changes for active links
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
         let current = '';
@@ -188,8 +286,7 @@ const createScrollToTopButton = () => {
             button.style.opacity = '1';
             button.style.visibility = 'visible';
         } else {
-            button.style.opacity = '0';
-            button.style.visibility = 'hidden';
+            button.style.opacity = '0';            button.style.visibility = 'hidden';
         }
     });
 };
