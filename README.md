@@ -18,7 +18,7 @@ This website draws inspiration from several iconic design movements and technolo
 
 ### **PlayStation 3 XMB Interface** (2006-2013)
 - **Wave Animation**: Dynamic background waves inspired by the PS3's Cross Media Bar
-- **Fluid Motion**: Smooth, rippling effects that respond to user interaction
+- **Fluid Motion**: Smooth, rippling effects
 - **Atmospheric Feel**: Immersive background elements that create depth
 
 ## Features
