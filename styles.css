@@ -640,7 +640,7 @@ section {
 
 .about-content {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 320px 1fr; /* Increased from 280px to 320px */
     grid-template-rows: auto auto;
     gap: 1.5rem;
     align-items: start;
@@ -661,8 +661,8 @@ section {
 
 .about-picture-frame {
     position: relative;
-    width: 280px;
-    height: 373px; /* 3:4 ratio (280 * 4/3 = 373) */
+    width: 320px; /* Increased from 280px to 320px */
+    height: 427px; /* 3:4 ratio (320 * 4/3 = 427) */
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
@@ -725,6 +725,12 @@ section {
 }
 
 /* About Profile Image */
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 .about-profile-image {
     width: 100%;
     height: 100%;
@@ -734,16 +740,36 @@ section {
     box-shadow: 
         0 8px 24px rgba(0, 0, 0, 0.3),
         0 4px 12px rgba(0, 85, 153, 0.2);
-    transition: all 0.4s ease;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 1;
+    opacity: 0;
 }
 
-.about-profile-image:hover {
-    transform: scale(1.02);
-    box-shadow: 
-        0 12px 32px rgba(0, 0, 0, 0.4),
-        0 6px 16px rgba(0, 85, 153, 0.3);
+.about-profile-image:first-child {
+    position: relative; /* First image sets the height */
+}
+
+/* Slideshow fade animation */
+.fade {
+    animation: fadeAnimation 15s linear infinite 0s;
+}
+
+.slide:nth-child(2) {
+    animation-delay: 5s;
+}
+
+.slide:nth-child(3) {
+    animation-delay: 10s;
+}
+
+@keyframes fadeAnimation {
+    0% { opacity: 0; }
+    5% { opacity: 1; }
+    33% { opacity: 1; }
+    38% { opacity: 0; }
+    100% { opacity: 0; }
 }
 
 /* Removed shine animation */
@@ -2353,6 +2379,33 @@ section {
         grid-row: 3;
     }
 }
+
+/* Responsive Styles for Large Screens */
+@media (min-width: 1200px) {
+    .about-content {
+        grid-template-columns: 380px 1fr; /* Even larger on big screens */
+        gap: 2rem;
+    }
+    
+    .about-picture-frame {
+        width: 380px; /* Increased size for large screens */
+        height: 507px; /* 3:4 ratio (380 * 4/3 = 507) */
+    }
+}
+
+/* Responsive Styles for Extra Large Screens */
+@media (min-width: 1600px) {
+    .about-content {
+        grid-template-columns: 450px 1fr; /* Maximum size on extra large screens */
+        gap: 2.5rem;
+    }
+    
+    .about-picture-frame {
+        width: 450px; /* Maximum size for very large screens */
+        height: 600px; /* 3:4 ratio (450 * 4/3 = 600) */
+    }
+}
+
 
 /* Mobile hero section optimization */
 @media (max-width: 920px) {
