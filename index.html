@@ -47,7 +47,7 @@
         <section id="home" class="hero">
             <div class="hero-container">
                 <div class="hero-profile">
-                    <img src="profile-picture.jpg" alt="Christos Papafragkos" class="hero-avatar" loading="lazy">
+                    <img src="assets/profile-picture.jpg" alt="Christos Papafragkos" class="hero-avatar" loading="lazy">
                 </div>
                 <h1 class="hero-title">
                     <span data-en="Hello, I'm" data-gr="Γεια σας, είμαι ο">Hello, I'm</span> 
@@ -71,9 +71,9 @@
                     <div class="about-profile">
                         <div class="about-picture-frame">
                             <div class="slideshow-container">
-                                <img src="about-picture1.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy">
-                                <img src="about-picture2.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy">
-                                <img src="about-picture3.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy">
+                                <img src="assets/about-picture1.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy">
+                                <img src="assets/about-picture2.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy">
+                                <img src="assets/about-picture3.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -108,24 +108,24 @@
                 <h2 class="section-title" data-en="My Projects" data-gr="Τα Έργα μου">My Projects</h2>                <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-image">
-                            <div class="project-placeholder">Project 1</div>
+                            <img src="assets/battlesnake.jpg" alt="Battlesnake AI Project" loading="lazy">
                         </div>
-                        <div class="project-content">                            <h3 data-en="Project One" data-gr="Έργο Ένα">Project One</h3>
-                            <p data-en="A brief description of my first project. What technologies did I use? What problem does it solve?" data-gr="Μια σύντομη περιγραφή του πρώτου μου έργου. Ποιες τεχνολογίες χρησιμοποιήσα; Τι πρόβλημα λύνει;">A brief description of your first project. What technologies did I use? What problem does it solve?</p>
+                        <div class="project-content">                            <h3 data-en="Battlesnake" data-gr="Battlesnake AI">Battlesnake AI</h3>
+                            <p data-en="An intelligent snake built for the Battlesnake platform. Implements pathfinding algorithms and strategic decision-making to compete against other snakes in multiplayer matches." data-gr="Ένα έξυπνο φιδι που δημιουργήθηκε για την πλατφόρμα Battlesnake. Υλοποιεί αλγόριθμους εύρεσης διαδρομής και στρατηγική λήψη αποφάσεων για να ανταγωνιστεί άλλα φίδια σε μάχες.">An intelligent snake built for the Battlesnake platform. Implements pathfinding algorithms and strategic decision-making to compete against other snakes in multiplayer matches.</p>
                             <div class="project-links">
-                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" target="_blank" rel="noopener noreferrer">View Project</a>
-                                <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('battlesnake')" target="_blank" rel="noopener noreferrer">View Project</a>
+                                <a href="https://github.com/krisskash/SDIP_Battlesnake" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
                     </div>                    <div class="project-card">
                         <div class="project-image">
-                            <div class="project-placeholder">Project 2</div>
+                            <img src="assets/dronedrop.jpg" alt="DroneDrop Project" loading="lazy">
                         </div>
-                        <div class="project-content">                            <h3 data-en="Project Two" data-gr="Έργο Δύο">Project Two</h3>
-                            <p data-en="A brief description of my second project. What makes this project special or unique?" data-gr="Μια σύντομη περιγραφή του δεύτερου μου έργου. Τι κάνει αυτό το έργο ξεχωριστό ή μοναδικό;">A brief description of your second project. What makes this project special or unique?</p>
+                        <div class="project-content">                            <h3 data-en="DroneDrop" data-gr="DroneDrop">DroneDrop</h3>
+                            <p data-en="An innovative drone delivery system that optimizes package delivery routes using advanced algorithms and real-time tracking for urban environments." data-gr="Ένα καινοτόμο σύστημα παράδοσης με drone που βελτιστοποιεί τις διαδρομές παράδοσης πακέτων χρησιμοποιώντας προηγμένους αλγόριθμους και παρακολούθηση σε πραγματικό χρόνο για αστικά περιβάλλοντα.">An innovative drone delivery system that optimizes package delivery routes using advanced algorithms and real-time tracking for urban environments.</p>
                             <div class="project-links">
-                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" target="_blank" rel="noopener noreferrer">View Project</a>
-                                <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('dronedrop')" target="_blank" rel="noopener noreferrer">View Project</a>
+                                <a href="https://github.com/krisskash/DroneDrop" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
                     </div>                    <div class="project-card">
@@ -163,9 +163,28 @@
         </section>
     </main>
 
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <img id="modalGif" src="" alt="Project Demo" class="modal-gif">
+            </div>
+            <div class="modal-body">
+                <h2 id="modalTitle">Project Title</h2>
+                <p id="modalDescription">Project description will appear here.</p>
+                <div class="modal-links">
+                    <a id="modalGithubLink" href="#" class="modal-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Christos Papafragkos. All rights reserved.</p>
+            <p>&copy; 2025 Christos Papafragkos. All rights reserved.
+            <br>Hosted on GitHub Pages 
+            </p>
         </div>
     </footer>    <script src="language.js"></script>
     <script>
@@ -215,6 +234,82 @@
             }
             
             window.addEventListener('scroll', requestTick, { passive: true });
+        });
+    </script>
+    <script>
+        // Project modal functionality
+        const projectData = {
+            battlesnake: {
+                title: "Battlesnake AI",
+                titleGr: "Battlesnake AI",
+                gif: "assets/battlesnake.gif", // Replace battlesnake.jpg with battlesnake.gif for animated demo
+                description: "An intelligent snake AI built for the Battlesnake platform. This project implements advanced pathfinding algorithms including A* search and strategic decision-making to compete against other snakes in real-time multiplayer matches. The AI considers multiple factors like food positioning, opponent behavior, and escape routes to maximize survival and growth.",
+                descriptionGr: "Ένα έξυπνο AI φιδιού που δημιουργήθηκε για την πλατφόρμα Battlesnake. Αυτό το έργο υλοποιεί προηγμένους αλγόριθμους εύρεσης διαδρομής συμπεριλαμβανομένης της αναζήτησης A* και στρατηγικής λήψης αποφάσεων για να ανταγωνιστεί άλλα φίδια σε μάχες. Το AI εξετάζει πολλαπλούς παράγοντες όπως η τοποθέτηση φαγητού, η συμπεριφορά των αντιπάλων και οι διαδρομές διαφυγής για να μεγιστοποιήσει την επιβίωση και την ανάπτυξη.",
+                githubLink: "https://github.com/krisskash/SDIP_Battlesnake"
+            },
+            dronedrop: {
+                title: "DroneDrop",
+                titleGr: "DroneDrop",
+                gif: "assets/dronedrop.gif", // Add dronedrop.gif for animated demo
+                description: "DroneDrop is a complete web application for a drone delivery service, similar to how you might order food delivery but using drones instead of conventional methods. The project demonstrates building a full website with both a server (backend) and user interface (frontend). Users can create accounts, browse products in an online shop, add items to their cart, place orders, and track their deliveries. The system also includes special admin pages for managing the business. The website is built using modern web technologies: Node.js and Express for the server that handles all the data and user requests, MongoDB as the database to store user information and orders, and Bootstrap to make the website look good on phones, tablets, and computers. The project also integrates the Google Maps API to display delivery locations and routes. The project is organized into two main parts - the server code that processes orders and user data, and the website pages that customers see and interact with. This shows how to build a complete online business platform from scratch.",
+                descriptionGr: "Το DroneDrop είναι μια ιστοσελίδα για υπηρεσία παράδοσης με drone, παρόμοια με το πώς μπορεί κάποιος να παραγγείλει φαγητό αλλά χρησιμοποιώντας drones αντί για κανονικά μέσα. Το έργο δείχνει πώς να δημιουργήσει κάποιος έναν πλήρη ιστότοπο με server (backend) και διεπαφή χρήστη (frontend). Οι χρήστες μπορούν να δημιουργούν λογαριασμούς, να περιηγούνται σε προϊόντα σε ένα online κατάστημα, να προσθέτουν στοιχεία στο καλάθι τους, να κάνουν παραγγελίες, και να παρακολουθούν τις παραδόσεις τους. Το σύστημα περιλαμβάνει επίσης ειδικές σελίδες διαχειριστή για τη διαχείριση της επιχείρησης. Ο ιστότοπος είναι δημιουργημένος χρησιμοποιώντας σύγχρονες τεχνολογίες ιστού: Node.js και Express για τον server που χειρίζεται όλα τα δεδομένα και τα αιτήματα χρηστών, MongoDB ως βάση δεδομένων για να αποθηκεύει πληροφορίες χρηστών και παραγγελίες, και Bootstrap για να κάνει τον ιστότοπο να φαίνεται καλά σε τηλέφωνα, tablets, και υπολογιστές. Το έργο ενσωματώνει επίσης το Google Maps API για την εμφάνιση τοποθεσιών και διαδρομών παράδοσης. Το έργο είναι οργανωμένο σε δύο κύρια μέρη - τον κώδικα του server που επεξεργάζεται παραγγελίες και δεδομένα χρηστών, και τις σελίδες του ιστότοπου που οι πελάτες βλέπουν και αλληλεπιδρούν. Αυτό δείχνει πώς να δημιουργήσει κάποιος μια πλήρη πλατφόρμα online επιχείρησης από την αρχή.",
+                githubLink: "https://github.com/krisskash/DroneDrop"
+            }
+        };
+
+        function openProjectModal(projectKey) {
+            const modal = document.getElementById('projectModal');
+            const project = projectData[projectKey];
+            const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+            
+            if (!project) return;
+            
+            // Update modal content
+            document.getElementById('modalGif').src = project.gif;
+            document.getElementById('modalTitle').textContent = currentLang === 'gr' ? project.titleGr : project.title;
+            document.getElementById('modalDescription').textContent = currentLang === 'gr' ? project.descriptionGr : project.description;
+            
+            // Update GitHub link
+            const githubLink = document.getElementById('modalGithubLink');
+            githubLink.href = project.githubLink;
+            githubLink.onclick = function(e) {
+                e.preventDefault();
+                window.open(project.githubLink, '_blank');
+                return false;
+            };
+            
+            // Show modal
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Modal event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('projectModal');
+            const closeBtn = document.querySelector('.close');
+            
+            // Close modal when clicking the X button
+            closeBtn.onclick = closeProjectModal;
+            
+            // Close modal when clicking outside of it
+            modal.onclick = function(event) {
+                if (event.target === modal) {
+                    closeProjectModal();
+                }
+            };
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && modal.style.display === 'block') {
+                    closeProjectModal();
+                }
+            });
         });
     </script>
     <script src="script.js"></script>

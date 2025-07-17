@@ -1,8 +1,106 @@
+@media (max-width: 768px) {
+  .projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .project-card {
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .project-image {
+    width: 100%;
+    min-width: 0;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 18px 18px 0 0;
+    background: linear-gradient(135deg, rgba(0,170,255,0.6) 0%, rgba(0,135,204,0.7) 25%, rgba(75,210,230,0.6) 50%, rgba(0,190,190,0.7) 75%, rgba(0,85,153,0.6) 100%);
+  }
+  .project-image img,
+  .project-image video,
+  .project-image gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+    margin: 0 auto;
+  }
+}
 /* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Frutiger Aero Scrollbar Styles */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: linear-gradient(90deg, 
+        rgba(173, 216, 230, 0.3) 0%, 
+        rgba(135, 206, 235, 0.2) 50%, 
+        rgba(176, 224, 230, 0.3) 100%);
+    border-radius: 12px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, 
+        rgba(64, 224, 208, 0.9) 0%, 
+        rgba(0, 191, 255, 0.8) 25%, 
+        rgba(30, 144, 255, 0.9) 50%, 
+        rgba(0, 206, 209, 0.8) 75%, 
+        rgba(72, 209, 204, 0.9) 100%);
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, 
+        rgba(64, 224, 208, 1) 0%, 
+        rgba(0, 191, 255, 0.95) 25%, 
+        rgba(30, 144, 255, 1) 50%, 
+        rgba(0, 206, 209, 0.95) 75%, 
+        rgba(72, 209, 204, 1) 100%);
+    box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg, 
+        rgba(32, 178, 170, 1) 0%, 
+        rgba(0, 149, 255, 1) 25%, 
+        rgba(25, 118, 210, 1) 50%, 
+        rgba(0, 172, 193, 1) 75%, 
+        rgba(26, 188, 156, 1) 100%);
+}
+
+::-webkit-scrollbar-corner {
+    background: rgba(173, 216, 230, 0.3);
+}
+
+/* Firefox scrollbar */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(72, 209, 204, 0.9) rgba(173, 216, 230, 0.3);
 }
 
 /* Performance optimizations */
@@ -16,11 +114,19 @@ body {
     font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     color: #2c3e50;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #0369a1 50%, #0891b2 75%, #065f46 100%);
+    background: linear-gradient(135deg, 
+        #40E0D0 0%, 
+        #00BFFF 15%, 
+        #1E90FF 30%, 
+        #00CED1 45%, 
+        #48D1CC 60%, 
+        #20B2AA 75%, 
+        #008B8B 90%, 
+        #4682B4 100%);
     background-attachment: fixed;
     background-size: 400% 400%;
     min-height: 100vh;
-    animation: gradientShift 12s ease-in-out infinite;
+    animation: frutiger-gradientShift 15s ease-in-out infinite;
     position: relative;
     overflow-x: hidden;
     will-change: scroll-position;
@@ -28,13 +134,19 @@ body {
     overscroll-behavior: contain;
 }
 
-/* Animated gradient background */
-@keyframes gradientShift {
+/* Frutiger Aero animated gradient background */
+@keyframes frutiger-gradientShift {
     0% {
         background-position: 0% 50%;
     }
+    25% {
+        background-position: 100% 25%;
+    }
     50% {
-        background-position: 100% 50%;
+        background-position: 100% 75%;
+    }
+    75% {
+        background-position: 0% 75%;
     }
     100% {
         background-position: 0% 50%;
@@ -1077,6 +1189,8 @@ section {
     border: 1px solid rgba(255, 255, 255, 0.15);
     position: relative;
     transform: translateZ(0);
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card::before {
@@ -1155,11 +1269,8 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
-        radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
-        linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
-    animation: liquidFlow 4s ease-in-out infinite;
+    background: transparent; /* Completely removed shine gradients */
+    animation: none; /* Disabled shine effect */
 }
 
 .project-image::after {
@@ -1169,13 +1280,8 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, 
-        transparent 0%, 
-        rgba(255, 255, 255, 0.15) 25%, 
-        transparent 50%, 
-        rgba(255, 255, 255, 0.1) 75%, 
-        transparent 100%);
-    animation: liquidRipple 6s ease-in-out infinite;
+    background: transparent; /* Completely removed shine gradients */
+    animation: none; /* Disabled shine effect */
 }
 
 @keyframes liquidFlow {
@@ -1226,6 +1332,9 @@ section {
     position: relative;
     z-index: 1;
     background: transparent;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-content h3 {
@@ -1247,6 +1356,7 @@ section {
     display: flex;
     gap: 1.2rem;
     flex-wrap: wrap;
+    margin-top: auto;
 }
 
 .project-link {
@@ -2558,4 +2668,274 @@ section {
     }
 }
 
+/* Project Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(64, 224, 208, 0.15) 0%, 
+        rgba(0, 191, 255, 0.15) 25%, 
+        rgba(30, 144, 255, 0.15) 50%, 
+        rgba(0, 206, 209, 0.15) 75%, 
+        rgba(72, 209, 204, 0.15) 100%);
+    backdrop-filter: blur(25px) saturate(1.8);
+    -webkit-backdrop-filter: blur(25px) saturate(1.8);
+}
 
+.modal-content {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15) 0%, 
+        rgba(255, 255, 255, 0.08) 40%,
+        rgba(64, 224, 208, 0.05) 60%,
+        rgba(0, 191, 255, 0.03) 100%);
+    /* Hide scrollbars for all browsers */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    backdrop-filter: blur(25px) saturate(1.8);
+    -webkit-backdrop-filter: blur(25px) saturate(1.8);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 24px;
+    margin: 5% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 
+        0 0 0 0.5px rgba(255, 255, 255, 0.2),
+        0 32px 64px rgba(0, 0, 0, 0.25),
+        0 16px 32px rgba(64, 224, 208, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+.modal-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(255, 255, 255, 0.05) 40%,
+        transparent 60%,
+        rgba(64, 224, 208, 0.02) 100%);
+    border-radius: 24px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.modal-content::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    height: 30%;
+    background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 100%);
+    border-radius: 23px 23px 0 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.close {
+    color: rgba(255, 255, 255, 0.8);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 10;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.close:hover,
+.close:focus {
+    color: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.modal-header {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 24px 24px 0 0;
+    background: linear-gradient(135deg, 
+        rgba(64, 224, 208, 0.1) 0%, 
+        rgba(0, 191, 255, 0.1) 100%);
+    z-index: 2;
+}
+
+.modal-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px 24px 0 0;
+}
+
+.modal-body {
+    padding: 30px;
+    color: rgba(255, 255, 255, 0.9);
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.08) 0%, 
+        rgba(64, 224, 208, 0.03) 50%,
+        rgba(0, 191, 255, 0.03) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 0 0 24px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    position: relative;
+    z-index: 2;
+    /* Hide scrollbars for all browsers */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+.modal-body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.modal-body h2 {
+    margin: 0 0 20px 0;
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, 
+        rgba(64, 224, 208, 0.1) 0%, 
+        rgba(0, 191, 255, 0.1) 100%);
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.modal-body p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.modal-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.modal-link {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, 
+        rgba(64, 224, 208, 0.8) 0%, 
+        rgba(0, 191, 255, 0.8) 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+    transition: left 0.5s ease;
+}
+
+.modal-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(64, 224, 208, 0.4);
+    background: linear-gradient(135deg, 
+        rgba(64, 224, 208, 0.9) 0%, 
+        rgba(0, 191, 255, 0.9) 100%);
+}
+
+.modal-link:hover::before {
+    left: 100%;
+}
+
+/* Responsive modal */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        max-height: 85vh;
+    }
+    
+    .modal-header {
+        height: 200px;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .modal-body h2 {
+        font-size: 1.5rem;
+    }
+    
+    .modal-body p {
+        font-size: 1rem;
+    }
+    
+    .modal-links {
+        flex-direction: column;
+    }
+    
+    .modal-link {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+
+ 
