@@ -13,45 +13,10 @@ let lastScrollTop = 0;
 const navbar = document.querySelector('.glass-nav');
 const scrollThreshold = 100; // Only hide after scrolling 100px
 
-console.log('Navigation element found:', navbar);
-console.log('Initial navbar classes:', navbar ? navbar.className : 'No navbar found');
-
 // Initialize navbar as visible
 if (navbar) {
     navbar.classList.add('nav-visible');
-    console.log('Added nav-visible class on load');
 }
-
-window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    console.log('Scroll position:', scrollTop, 'Threshold:', scrollThreshold, 'Last scroll:', lastScrollTop);
-    
-    // Only trigger after scrolling past threshold
-    if (scrollTop > scrollThreshold) {
-        if (scrollTop > lastScrollTop) {
-            // Scrolling down - hide navbar
-            console.log('SCROLLING DOWN - HIDING NAVBAR');
-            navbar.classList.add('nav-hidden');
-            navbar.classList.remove('nav-visible');
-            console.log('After hiding - classes:', navbar.className);
-        } else {
-            // Scrolling up - show navbar
-            console.log('SCROLLING UP - SHOWING NAVBAR');
-            navbar.classList.remove('nav-hidden');
-            navbar.classList.add('nav-visible');
-            console.log('After showing - classes:', navbar.className);
-        }
-    } else {
-        // At top of page - always show navbar
-        console.log('AT TOP - SHOWING NAVBAR');
-        navbar.classList.remove('nav-hidden');
-        navbar.classList.add('nav-visible');
-        console.log('At top - classes:', navbar.className);
-    }
-    
-    lastScrollTop = scrollTop;
-});
 
 if (mobileNavExists && navToggle) {
     navToggle.addEventListener('click', () => {
@@ -147,7 +112,7 @@ window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
     // Navigation bar hide/show logic
-    if (scrollTop > scrollThreshold) {
+    if (navbar && scrollTop > scrollThreshold) {
         if (scrollTop > lastScrollTop) {
             // Scrolling down - hide navbar
             navbar.classList.add('nav-hidden');
@@ -157,7 +122,7 @@ window.addEventListener('scroll', () => {
             navbar.classList.remove('nav-hidden');
             navbar.classList.add('nav-visible');
         }
-    } else {
+    } else if (navbar) {
         // At top of page - always show navbar
         navbar.classList.remove('nav-hidden');
         navbar.classList.add('nav-visible');
@@ -197,8 +162,8 @@ window.addEventListener('scroll', () => {
                 }
             }
         });
-    }, 50); // 50ms debounce
-});
+}, 50); // 50ms debounce
+}, { passive: true });
 
 // Intersection Observer for animations
 const observerOptions = {
@@ -286,15 +251,14 @@ const createScrollToTopButton = () => {
             button.style.opacity = '1';
             button.style.visibility = 'visible';
         } else {
-            button.style.opacity = '0';            button.style.visibility = 'hidden';
+            button.style.opacity = '0';
+            button.style.visibility = 'hidden';
         }
-    });
+    }, { passive: true });
 };
 
 // Initialize everything when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Main script loaded');
-    
     // Initialize animations
     const animatedElements = document.querySelectorAll('.project-card, .skill-item, .about-text');
     animatedElements.forEach(el => {
@@ -312,6 +276,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize scroll-to-top button
     createScrollToTopButton();
-    
-    console.log('Main script initialization complete');
 });

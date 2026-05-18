@@ -7,7 +7,6 @@ window.toggleLanguageDropdown = toggleLanguageDropdown;
 window.changeLanguage = changeLanguage;
 
 function toggleLanguageDropdown() {
-    console.log('Toggling language dropdown...');
     const dropdown = document.getElementById('languageDropdown');
     const btn = document.getElementById('languageBtn');
     
@@ -21,17 +20,13 @@ function toggleLanguageDropdown() {
     if (isLanguageDropdownOpen) {
         dropdown.style.display = 'block';
         btn.classList.add('active');
-        console.log('Language dropdown opened');
     } else {
         dropdown.style.display = 'none';
         btn.classList.remove('active');
-        console.log('Language dropdown closed');
     }
 }
 
 function changeLanguage(language) {
-    console.log('Changing language to:', language);
-    
     if (language !== 'en' && language !== 'gr') {
         console.error('Invalid language:', language);
         return;
@@ -41,13 +36,11 @@ function changeLanguage(language) {
     
     // Update all elements with data-en and data-gr attributes
     const translatableElements = document.querySelectorAll('[data-en][data-gr]');
-    console.log('Found translatable elements:', translatableElements.length);
     
     translatableElements.forEach(element => {
         const translation = element.getAttribute('data-' + language);
         if (translation) {
             element.textContent = translation;
-            console.log('Updated element:', element.tagName, 'to:', translation);
         }
     });
     
@@ -56,12 +49,10 @@ function changeLanguage(language) {
     const languageText = languageBtn.querySelector('.language-text');
     if (languageText) {
         languageText.textContent = language.toUpperCase();
-        console.log('Updated language button to:', language.toUpperCase());
     }
     
     // Update HTML lang attribute
     document.documentElement.lang = language === 'gr' ? 'el' : 'en';
-    console.log('Updated HTML lang attribute to:', document.documentElement.lang);
     
     // Close dropdown only if it's currently open
     if (isLanguageDropdownOpen) {
@@ -70,13 +61,10 @@ function changeLanguage(language) {
     
     // Save preference
     localStorage.setItem('preferredLanguage', language);
-    console.log('Language preference saved:', language);
 }
 
 // Load saved language preference on page load
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Language script loaded');
-    
     // Ensure dropdown is initially closed
     const dropdown = document.getElementById('languageDropdown');
     const btn = document.getElementById('languageBtn');
@@ -84,12 +72,10 @@ document.addEventListener('DOMContentLoaded', function() {
         dropdown.style.display = 'none';
         btn.classList.remove('active');
         isLanguageDropdownOpen = false;
-        console.log('Language dropdown initialized as closed');
     }
     
     const savedLanguage = localStorage.getItem('preferredLanguage');
     if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'gr')) {
-        console.log('Loading saved language preference:', savedLanguage);
         changeLanguage(savedLanguage);
     }
     
@@ -105,5 +91,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-console.log('Language switching script loaded - using data attributes approach');

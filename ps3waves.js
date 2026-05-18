@@ -154,7 +154,7 @@ class WaveBackground {
     // Performance optimization flags
     this.isLowPowerMode = this.checkLowPowerMode();
     this.frameCount = 0;
-    this.targetFPS = 60;
+    this.targetFPS = this.isLowPowerMode ? 15 : 42;
     this.fpsInterval = 1000 / this.targetFPS;
     this.lastTime = performance.now();
     
@@ -204,7 +204,7 @@ class WaveBackground {
     renderer.setClearColor(0x000000, 0);
     
     // Optimize renderer settings
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap pixel ratio
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, this.isLowPowerMode ? 1 : 1.25)); // Cap pixel ratio
     
     const canvas = renderer.domElement;
     canvas.style.position = 'fixed';
@@ -259,7 +259,7 @@ class WaveBackground {
     this.waveClothMaterial = waveClothMaterial;
   }  createPlane() {
     // Optimize geometry complexity based on device capability
-    const segments = this.isLowPowerMode ? 64 : 128;
+    const segments = this.isLowPowerMode ? 32 : 64;
     const geometry = new THREE.PlaneBufferGeometry(10, 10, segments, segments);
     const material = this.waveClothMaterial;
     const plane = new THREE.Mesh(geometry, material);
@@ -292,7 +292,7 @@ class WaveBackground {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
       }, 100); // Debounce resize events
     });
-    
+
     // Throttled mouse movement for wave interaction
     let mouseTimeout;
     window.addEventListener("mousemove", (e) => {

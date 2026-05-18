@@ -123,13 +123,12 @@ body {
         #20B2AA 75%, 
         #008B8B 90%, 
         #4682B4 100%);
-    background-attachment: fixed;
+    background-attachment: scroll;
     background-size: 400% 400%;
     min-height: 100vh;
-    animation: frutiger-gradientShift 15s ease-in-out infinite;
+    animation: frutiger-gradientShift 30s ease-in-out infinite;
     position: relative;
     overflow-x: hidden;
-    will-change: scroll-position;
     /* Smooth scrolling removed - standard browser behavior */
     overscroll-behavior: contain;
 }
@@ -156,7 +155,7 @@ body {
 /* Floating background elements */
 body::before {
     content: '';
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -166,7 +165,7 @@ body::before {
         radial-gradient(ellipse 600px 300px at 80% 70%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
         radial-gradient(ellipse 1000px 200px at 50% 20%, rgba(34, 197, 94, 0.12) 0%, transparent 60%),
         radial-gradient(ellipse 400px 600px at 10% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
-    animation: floatElements 15s ease-in-out infinite;
+    animation: floatElements 30s ease-in-out infinite;
     z-index: -2;
     pointer-events: none;
 }
@@ -193,7 +192,7 @@ body::before {
 /* Moving particles */
 body::after {
     content: '';
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -206,22 +205,19 @@ body::after {
         radial-gradient(2.8px 2.8px at 300px 70px, rgba(0, 85, 153, 0.7), transparent 70%);
     background-repeat: repeat;
     background-size: 350px 180px;
-    animation: moveParticles 25s linear infinite;
+    animation: moveParticles 45s linear infinite;
     z-index: -1;
     pointer-events: none;
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
 }
 
 @keyframes moveParticles {
     0% {
         transform: translateX(0px) translateY(0px);
         opacity: 0.5;
-        filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5));
     }
     25% {
         transform: translateX(-50px) translateY(-25px);
         opacity: 0.9;
-        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
     }
     50% {
         transform: translateX(-100px) translateY(-50px);
@@ -1318,7 +1314,7 @@ section {
     color: rgba(255, 255, 255, 0.95);
     font-size: 1.6rem;
     font-weight: 300;
-    text-shadow: 
+    text-shadow:
         0 2px 8px rgba(0, 0, 0, 0.3),
         0 0 20px rgba(255, 255, 255, 0.3);
     position: relative;
@@ -1678,9 +1674,9 @@ section {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #0369a1 50%, #0891b2 75%, #065f46 100%);
-    background-attachment: fixed;
+    background-attachment: scroll;
     background-size: 400% 400%;
-    animation: gradientShift 12s ease-in-out infinite;
+    animation: gradientShift 30s ease-in-out infinite;
     z-index: -10;
     pointer-events: none;
 }
@@ -1707,9 +1703,9 @@ section {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #0369a1 50%, #0891b2 75%, #065f46 100%);
-    background-attachment: fixed;
+    background-attachment: scroll;
     background-size: 400% 400%;
-    animation: gradientShift 12s ease-in-out infinite;
+    animation: gradientShift 30s ease-in-out infinite;
     z-index: -10;
     pointer-events: none;
     perspective: 1000px;
@@ -2373,7 +2369,12 @@ section {
     transition: all 0.3s ease;
     border-radius: 8px;
     margin: 4px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    text-shadow:
+        -1px -1px 0 rgba(0, 0, 0, 0.65),
+        1px -1px 0 rgba(0, 0, 0, 0.65),
+        -1px 1px 0 rgba(0, 0, 0, 0.65),
+        1px 1px 0 rgba(0, 0, 0, 0.65),
+        0 2px 4px rgba(0, 0, 0, 0.55);
 }
 
 .language-option:hover {
@@ -2792,7 +2793,8 @@ section {
 
 .modal-header {
     position: relative;
-    height: 300px;
+    aspect-ratio: 16 / 9;
+    height: auto;
     overflow: hidden;
     border-radius: 24px 24px 0 0;
     background: linear-gradient(135deg, 
@@ -2802,9 +2804,10 @@ section {
 }
 
 .modal-gif {
+    display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
     border-radius: 24px 24px 0 0;
 }
 
@@ -2913,10 +2916,6 @@ section {
         width: 95%;
         margin: 10% auto;
         max-height: 85vh;
-    }
-    
-    .modal-header {
-        height: 200px;
     }
     
     .modal-body {
