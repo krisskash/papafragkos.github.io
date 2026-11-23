@@ -2942,3 +2942,267 @@ section {
 
 
  
+
+/* ==========================================================================
+   Performance overrides
+   - Stop animations that repaint large areas every frame (background-position
+     and filter animations). Movement is kept via transform/opacity, which the
+     GPU can animate cheaply.
+   - "Lite mode" (html.lite, set in <head> for phones / low-end hardware):
+     no decorative particle layers and no backdrop blur over the moving
+     background, which is the most expensive effect on weak GPUs.
+   ========================================================================== */
+
+/* Full-page gradient animation repainted the whole document every frame */
+body {
+    animation: none;
+    background-position: 0% 50%;
+}
+
+/* Large particle layers: drop the costly drop-shadow filter */
+.hero::after,
+.about::after,
+.projects::before,
+.contact::after {
+    filter: none;
+}
+
+/* Redefined without filter / background-position (last definition wins) */
+@keyframes moveHeroParticles {
+    0%   { transform: translate3d(0, 0, 0) scale(1);          opacity: 0.6; }
+    33%  { transform: translate3d(-100px, -30px, 0) scale(1.1); opacity: 0.9; }
+    66%  { transform: translate3d(-200px, -60px, 0) scale(0.9); opacity: 0.6; }
+    100% { transform: translate3d(-300px, 0, 0) scale(1);       opacity: 0.5; }
+}
+@keyframes aboutParticles {
+    0%   { transform: translate3d(0, 0, 0);          opacity: 0.6; }
+    50%  { transform: translate3d(-100px, -50px, 0); opacity: 0.9; }
+    100% { transform: translate3d(-200px, 0, 0);     opacity: 0.6; }
+}
+@keyframes projectsParticles {
+    0%   { transform: translate3d(0, 0, 0);          opacity: 0.6; }
+    50%  { transform: translate3d(-100px, -50px, 0); opacity: 0.9; }
+    100% { transform: translate3d(-200px, 0, 0);     opacity: 0.6; }
+}
+@keyframes contactParticles {
+    0%   { transform: translate3d(0, 0, 0);          opacity: 0.6; }
+    50%  { transform: translate3d(-100px, -50px, 0); opacity: 0.9; }
+    100% { transform: translate3d(-200px, 0, 0);     opacity: 0.6; }
+}
+@keyframes liquidProjectsBackground {
+    0%, 100% { opacity: 0.6; }
+    25%      { opacity: 0.8; }
+    50%      { opacity: 1; }
+    75%      { opacity: 0.7; }
+}
+@keyframes contactWave {
+    0%, 100% { transform: scale(1); }
+    33%      { transform: scale(1.05); }
+    66%      { transform: scale(0.95); }
+}
+
+/* ---------- Lite mode (phones / low-end devices) ---------- */
+html.lite body::before,
+html.lite body::after,
+html.lite .hero::before,
+html.lite .hero::after,
+html.lite .about::before,
+html.lite .about::after,
+html.lite .projects::before,
+html.lite .projects::after,
+html.lite .contact::before,
+html.lite .contact::after,
+html.lite .hero-avatar::before {
+    animation: none !important;
+}
+
+html.lite *,
+html.lite *::before,
+html.lite *::after {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Keep the nav readable without blur */
+html.lite .glass-nav {
+    background: rgba(255, 255, 255, 0.28);
+}
+html.lite .modal {
+    background: rgba(0, 20, 40, 0.85);
+}
+
+/* ==========================================================================
+   Experience section
+   ========================================================================== */
+.experience {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    border-radius: 30px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.experience-list {
+    max-width: 850px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.experience-card {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.5rem 1.75rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow:
+        0 0 0 0.5px rgba(255, 255, 255, 0.2),
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+.experience-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #4fc3f7, #26a69a, #66bb6a);
+}
+
+.experience-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.experience-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.experience-role {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.experience-company {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #b3e5fc;
+    margin-top: -0.65rem; /* sits right under the job title */
+    margin-bottom: 0.9rem;
+}
+
+.experience-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.experience-points li {
+    position: relative;
+    padding-left: 1.25rem;
+    line-height: 1.5;
+    font-size: 1.02rem;
+}
+
+.experience-points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4fc3f7;
+    box-shadow: 0 0 6px rgba(79, 195, 247, 0.8);
+}
+
+.experience-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.experience-tag {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    text-shadow: none;
+}
+
+@media (max-width: 920px) {
+    .experience-card {
+        flex-direction: column;
+        padding: 1.25rem;
+        gap: 0.9rem;
+    }
+    .experience-icon {
+        width: 46px;
+        height: 46px;
+        font-size: 1.3rem;
+    }
+    .experience-role {
+        font-size: 1.2rem;
+    }
+    .experience-points li {
+        font-size: 0.95rem;
+    }
+}
+
+/* Five menu links on phones: size links to their text so longer Greek words fit */
+@media (max-width: 920px) {
+    .nav-links {
+        gap: 0.2rem;
+        padding: 0 4px;
+    }
+    .nav-link {
+        flex: 0 1 auto;
+        padding: 4px 6px;
+    }
+}
+@media (max-width: 380px) {
+    .nav-link {
+        font-size: 0.7rem;
+        padding: 4px 4px;
+    }
+}
+
+/* Phones: two skill columns so longer (Greek) skill names fit without being cut */
+@media (max-width: 480px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .skill-item {
+        min-height: 56px;
+        height: 56px;
+    }
+}

@@ -1,4 +1,4 @@
-import * as THREE from "https://cdn.skypack.dev/three@0.124.0";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.124.0/build/three.module.min.js";
 
 // Wave cloth shader vertex code
 const waveClothVertexShader = `
@@ -154,7 +154,7 @@ class WaveBackground {
     // Performance optimization flags
     this.isLowPowerMode = this.checkLowPowerMode();
     this.frameCount = 0;
-    this.targetFPS = this.isLowPowerMode ? 15 : 42;
+    this.targetFPS = this.isLowPowerMode ? 24 : 40;
     this.fpsInterval = 1000 / this.targetFPS;
     this.lastTime = performance.now();
     
@@ -162,10 +162,8 @@ class WaveBackground {
   }
   
   checkLowPowerMode() {
-    // Check for mobile devices or low-end hardware
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    const isLowEnd = navigator.hardwareConcurrency <= 4;
-    return isMobile || isLowEnd;
+    // Set by the inline script in <head> (phones, <=4 cores, <=4GB RAM, data saver, small screens)
+    return document.documentElement.classList.contains('lite');
   }
   
   init() {
@@ -197,14 +195,15 @@ class WaveBackground {
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: !this.isLowPowerMode, // Disable antialiasing on low-end devices
-      powerPreference: "high-performance"
+      powerPreference: "default" // don't force the discrete GPU on laptops
     });
     
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0);
     
     // Optimize renderer settings
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, this.isLowPowerMode ? 1 : 1.25)); // Cap pixel ratio
+    // Render below native resolution: the waves are soft, so it is barely visible but much cheaper
+    renderer.setPixelRatio(this.isLowPowerMode ? 0.6 : Math.min(window.devicePixelRatio, 1));
     
     const canvas = renderer.domElement;
     canvas.style.position = 'fixed';
@@ -229,8 +228,9 @@ class WaveBackground {
     const width = window.innerWidth;
     const height = window.innerHeight;
     const canvas = renderer.domElement;
+    const ratio = renderer.getPixelRatio();
     
-    const isResizeNeeded = canvas.width !== width || canvas.height !== height;
+    const isResizeNeeded = canvas.width !== Math.floor(width * ratio) || canvas.height !== Math.floor(height * ratio);
     if (isResizeNeeded) {
       renderer.setSize(width, height, false);
     }
@@ -315,8 +315,17 @@ class WaveBackground {
   }
 
   setLoop() {
+    // Reduced motion: draw one still frame and stop
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.update();
+      this.renderer.render(this.scene, this.camera);
+      return;
+    }
+    const modal = document.getElementById('projectModal');
     // Optimized render loop with FPS control
     this.renderer.setAnimationLoop((currentTime) => {
+      // Background is hidden behind the project modal: skip work
+      if (modal && modal.style.display === 'block') return;
       // FPS limiting for better performance
       const deltaTime = currentTime - this.lastTime;
       
@@ -330,7 +339,24 @@ class WaveBackground {
   }
 }
 
-// Initialize the wave background when the page is loaded
-window.addEventListener('DOMContentLoaded', () => {
-  const waveBackground = new WaveBackground('.wave-cloth');
-});
+// Start the wave background once the page has loaded and the browser is idle,
+// so it never competes with the first paint
+const startWaves = () => {
+  try {
+    new WaveBackground('.wave-cloth');
+  } catch (err) {
+    console.warn('Wave background disabled:', err); // e.g. WebGL unavailable
+  }
+};
+const scheduleWaves = () => {
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(startWaves, { timeout: 1500 });
+  } else {
+    setTimeout(startWaves, 200);
+  }
+};
+if (document.readyState === 'complete') {
+  scheduleWaves();
+} else {
+  window.addEventListener('load', scheduleWaves, { once: true });
+}

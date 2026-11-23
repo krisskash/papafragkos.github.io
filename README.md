@@ -43,8 +43,9 @@ This website draws inspiration from several iconic design movements and technolo
 ## Sections
 
 - **Home**: Hero section with animated introduction and call-to-action buttons
-- **About**: Personal information with skills showcase and placeholder for profile photo
-- **Projects**: Portfolio showcase with glassmorphic project cards
+- **About**: Personal information with photo slideshow and skills showcase
+- **Experience**: IT support and freelance technician / web developer work
+- **Projects**: Portfolio showcase with glassmorphic project cards and video demos
 - **Contact**: Get in touch section with social media links
 
 ## Credits & Acknowledgments
@@ -53,7 +54,7 @@ This project incorporates code and techniques from various sources:
 
 ### **External Libraries**
 - **[Three.js](https://threejs.org/)** - 3D graphics library (v0.124.0, MIT License)
-  - Source: https://cdn.skypack.dev/three@0.124.0
+  - Source: https://cdn.jsdelivr.net/npm/three@0.124.0/build/three.module.min.js
 
 ### **Shader Code**
 - **Noise Functions** by Patricio Gonzalez Vivo
@@ -133,7 +134,7 @@ papafragkos.github.io/
 ├── ps3waves.js         # Three.js wave animation with shaders
 ├── script.js           # Main JavaScript functionality
 ├── language.js         # Language switching functionality
-├── profile-picture.jpg # Profile image
+├── assets/             # Photos, project thumbnails and demo videos
 └── README.md          # This file
 ```
 

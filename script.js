@@ -70,6 +70,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
+        if (targetId === '#') return; // e.g. "View Project" buttons that open the modal
         const target = document.querySelector(targetId);
         
         if (target) {
@@ -224,6 +225,7 @@ const createScrollToTopButton = () => {
     const button = document.createElement('button');
     button.innerHTML = '↑';
     button.className = 'scroll-to-top';
+    button.setAttribute('aria-label', 'Back to top');
     button.style.cssText = `
         position: fixed;
         bottom: 30px;
@@ -260,7 +262,7 @@ const createScrollToTopButton = () => {
 // Initialize everything when page loads
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize animations
-    const animatedElements = document.querySelectorAll('.project-card, .skill-item, .about-text');
+    const animatedElements = document.querySelectorAll('.project-card, .skill-item, .about-text, .experience-card');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';

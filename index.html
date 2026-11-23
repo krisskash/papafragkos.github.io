@@ -13,12 +13,74 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christos Papafragkos Website</title>
-    <meta name="title" content="Christos Papafragkos Website">
-    <meta name="description" content="Portfolio of Christos Papafragkos – projects, experience, and contact information.">
-    <meta property="og:title" content="Christos Papafragkos Website">
-    <meta property="og:description" content="Portfolio of Christos Papafragkos – projects, experience, and contact information.">
-    <meta property="og:type" content="website">
+    <script>
+      // Lite mode: lighter effects on phones and low-end hardware (see styles.css / ps3waves.js)
+      (function () {
+        var n = navigator, c = n.connection || {};
+        var lite = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(n.userAgent)
+          || (n.hardwareConcurrency && n.hardwareConcurrency <= 4)
+          || (n.deviceMemory && n.deviceMemory <= 4)
+          || c.saveData === true
+          || window.matchMedia('(max-width: 920px)').matches;
+        if (lite) document.documentElement.classList.add('lite');
+      })();
+    </script>
+    <title>Christos Papafragkos | Χρήστος Παπαφράγκος – Portfolio</title>
+    <meta name="description" content="Christos Papafragkos (Χρήστος Παπαφράγκος) – Computer Science student from Eleusis, Greece, IT support technician and developer. Projects, experience and contact.">
+    <meta name="author" content="Christos Papafragkos">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta property="og:title" content="Christos Papafragkos | Χρήστος Παπαφράγκος – Portfolio">
+    <meta property="og:description" content="Christos Papafragkos (Χρήστος Παπαφράγκος) – Computer Science student from Eleusis, Greece, IT support technician and developer. Projects, experience and contact.">
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Christos Papafragkos">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="el_GR">
+    <meta property="profile:first_name" content="Christos">
+    <meta property="profile:last_name" content="Papafragkos">
+    <meta property="og:url" content="https://www.papafragkos.com/">
+    <meta property="og:image" content="https://www.papafragkos.com/assets/profile-picture.jpg">
+    <meta property="og:image:alt" content="Christos Papafragkos (Χρήστος Παπαφράγκος)">
+    <meta name="twitter:card" content="summary">
+    <link rel="canonical" href="https://www.papafragkos.com/">
+    <meta name="theme-color" content="#00a8e8">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://www.papafragkos.com/#person",
+          "name": "Christos Papafragkos",
+          "alternateName": ["Χρήστος Παπαφράγκος", "Christos Papafragos", "Papafragkos Christos"],
+          "givenName": "Christos",
+          "familyName": "Papafragkos",
+          "url": "https://www.papafragkos.com/",
+          "image": "https://www.papafragkos.com/assets/profile-picture.jpg",
+          "jobTitle": "IT Support Technician",
+          "description": "Computer Science student from Eleusis, Greece. IT support technician, freelance computer repair and web developer.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Eleusis",
+            "addressCountry": "GR"
+          },
+          "knowsAbout": ["Web Development", "JavaScript", "Java", "Python", "Node.js", "PostgreSQL", "Hardware Repair", "Server Hardware", "Networking", "IT Support"],
+          "sameAs": [
+            "https://github.com/krisskash",
+            "https://www.linkedin.com/in/christos-papafragkos/"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.papafragkos.com/#website",
+          "url": "https://www.papafragkos.com/",
+          "name": "Christos Papafragkos",
+          "alternateName": "Χρήστος Παπαφράγκος",
+          "inLanguage": ["en", "el"],
+          "about": { "@id": "https://www.papafragkos.com/#person" }
+        }
+      ]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -36,6 +98,7 @@
             <div class="nav-links">
                 <a href="#home" class="nav-link" data-en="Home" data-gr="Αρχική">Home</a>
                 <a href="#about" class="nav-link" data-en="About" data-gr="Σχετικά">About</a>
+                <a href="#experience" class="nav-link" data-en="Experience" data-gr="Εμπειρία">Experience</a>
                 <a href="#projects" class="nav-link" data-en="Projects" data-gr="Έργα">Projects</a>
                 <a href="#contact" class="nav-link" data-en="Contact" data-gr="Επικοινωνία">Contact</a>
             </div>
@@ -63,11 +126,11 @@
         <section id="home" class="hero">
             <div class="hero-container">
                 <div class="hero-profile">
-                    <img src="assets/profile-picture.jpg" alt="Christos Papafragkos" class="hero-avatar" loading="lazy">
+                    <img src="assets/profile-picture.jpg" alt="Christos Papafragkos (Χρήστος Παπαφράγκος)" class="hero-avatar" width="150" height="150" fetchpriority="high">
                 </div>
                 <h1 class="hero-title">
                     <span data-en="Hello, I'm" data-gr="Γεια σας, είμαι ο">Hello, I'm</span> 
-                    <span class="highlight white-glow" data-en="Christos" data-gr="Χρήστος">Christos</span>
+                    <span class="highlight white-glow" data-en="Christos Papafragkos" data-gr="Χρήστος Παπαφράγκος">Christos Papafragkos</span>
                 </h1>
                 <p class="hero-subtitle" data-en="Welcome to my personal website" data-gr="Καλώς ήρθατε στην προσωπική μου ιστοσελίδα">Welcome to my personal website</p>
                 <p class="hero-description" data-en="Developing intuitive software while continuously leveling up my skills." data-gr="Αναπτύσσω εύχρηστο λογισμικό, βελτιώνοντας παράλληλα και τις δεξιότητές μου.">
@@ -82,15 +145,15 @@
 
         <section id="about" class="about">
             <div class="container">
-                <h2 class="section-title" data-en="About Me" data-gr="Σχετικά με Εμενα">About Me</h2>
+                <h2 class="section-title" data-en="About Me" data-gr="Σχετικά με Εμένα">About Me</h2>
                 <div class="about-content">
                     <div class="about-profile">
                         <div class="about-picture-frame">
                             <div class="slideshow-container">
-                                <img src="assets/about-picture1.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy">
-                                <img src="assets/about-picture2.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy">
-                                <img src="assets/about-picture3.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy">
-                                <img src="assets/about-picture4.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy">
+                                <img src="assets/about-picture1.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy" decoding="async">
+                                <img src="assets/about-picture2.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy" decoding="async">
+                                <img src="assets/about-picture3.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy" decoding="async">
+                                <img src="assets/about-picture4.jpg" alt="Christos Papafragkos" class="about-profile-image slide fade" loading="lazy" decoding="async">
                             </div>
                         </div>
                     </div>
@@ -98,7 +161,7 @@
                         <p data-en="Computer Science student from Eleusis, Greece, passionate about finding my way into the tech industry. I enjoy working across both software and hardware, from building web apps and games to experimenting with systems, devices, and hands-on repairs. I like projects that combine technical thinking with creative problem-solving, and my goal is to build useful solutions. When I'm not coding or tinkering with hardware, I'm gaming.😎" data-gr="Φοιτητής Επιστήμης Υπολογιστών από την Ελευσίνα, με πείσμα να βρω τη θέση μου στον κλάδο της τεχνολογίας. Μου αρέσει να δουλεύω τόσο με software όσο και με hardware, από web apps και games μέχρι πειραματισμό με συστήματα, συσκευές και πρακτικές επισκευές. Μου αρέσουν τα projects που συνδυάζουν τεχνική σκέψη με δημιουργική επίλυση προβλημάτων, και στόχος μου είναι να χτίζω χρήσιμες λύσεις. Όταν δεν γράφω κώδικα ή δεν ασχολούμαι με hardware, παίζω βιντεοπαιχνίδια.😎">
                             Computer Science student from Eleusis, Greece, passionate about finding my way into the tech industry.
                             I enjoy working across both software and hardware, from building web apps and games to experimenting with systems, devices, and hands-on repairs.
-                            I like projects that combine technical thinking with creative problem-solving, and my goal is to build useful solutions. When I'm not coding or tinkering with hardware, I'm gaming.
+                            I like projects that combine technical thinking with creative problem-solving, and my goal is to build useful solutions. When I'm not coding or tinkering with hardware, I'm gaming.😎
                         </p>
                     </div>
                     <div class="skills">
@@ -116,8 +179,57 @@
                             <div class="skill-item">Promela</div>
                             <div class="skill-item">Haskell</div>
                             <div class="skill-item">Python</div>
+                            <div class="skill-item" data-en="Hardware Repair" data-gr="Επισκευή Hardware">Hardware Repair</div>
+                            <div class="skill-item" data-en="PC Upgrades" data-gr="Αναβαθμίσεις PC">PC Upgrades</div>
+                            <div class="skill-item" data-en="Server Hardware" data-gr="Server Hardware">Server Hardware</div>
+                            <div class="skill-item" data-en="Networking" data-gr="Δίκτυα">Networking</div>
+                            <div class="skill-item" data-en="IT Support" data-gr="Τεχνική Υποστήριξη">IT Support</div>
+                            <div class="skill-item" data-en="Troubleshooting" data-gr="Επίλυση Προβλημάτων">Troubleshooting</div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section id="experience" class="experience">
+            <div class="container">
+                <h2 class="section-title" data-en="Experience" data-gr="Εμπειρία">Experience</h2>
+                <div class="experience-list">
+                    <article class="experience-card">
+                        <div class="experience-icon" aria-hidden="true">🛠️</div>
+                        <div class="experience-body">
+                            <h3 class="experience-role" data-en="IT Support Technician" data-gr="Τεχνικός Υποστήριξης IT">IT Support Technician</h3>
+                            <p class="experience-company" data-en="ECS Informatics" data-gr="ECS Πληροφορική">ECS Informatics</p>
+                            <ul class="experience-points">
+                                <li data-en="Handled server hardware: installation, upgrades and maintenance." data-gr="Διαχείριση hardware διακομιστών (servers): εγκατάσταση, αναβαθμίσεις και συντήρηση.">Handled server hardware: installation, upgrades and maintenance.</li>
+                                <li data-en="Diagnosed and repaired computers and printers." data-gr="Διάγνωση βλαβών και επισκευή υπολογιστών και εκτυπωτών.">Diagnosed and repaired computers and printers.</li>
+                                <li data-en="Set up and troubleshot basic networks." data-gr="Εγκατάσταση και αντιμετώπιση προβλημάτων σε βασικά δίκτυα.">Set up and troubleshot basic networks.</li>
+                                <li data-en="Provided on-site and remote IT support for business clients." data-gr="Τεχνική υποστήριξη επιτόπου και απομακρυσμένα σε επαγγελματίες πελάτες.">Provided on-site and remote IT support for business clients.</li>
+                            </ul>
+                            <div class="experience-tags">
+                                <span class="experience-tag" data-en="Server Hardware" data-gr="Server Hardware">Server Hardware</span>
+                                <span class="experience-tag" data-en="Computer Repair" data-gr="Επισκευή Υπολογιστών">Computer Repair</span>
+                                <span class="experience-tag" data-en="Printers" data-gr="Εκτυπωτές">Printers</span>
+                                <span class="experience-tag" data-en="Networking" data-gr="Δίκτυα">Networking</span>
+                                <span class="experience-tag" data-en="IT Support" data-gr="Τεχνική Υποστήριξη">IT Support</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="experience-card">
+                        <div class="experience-icon" aria-hidden="true">💻</div>
+                        <div class="experience-body">
+                            <h3 class="experience-role" data-en="Freelance Technician &amp; Web Developer" data-gr="Freelance Τεχνικός &amp; Web Developer">Freelance Technician &amp; Web Developer</h3>
+                            <ul class="experience-points">
+                                <li data-en="Repair jobs for private clients: troubleshooting, replacing parts and upgrading computers and laptops." data-gr="Εργασίες επισκευής για ιδιώτες: διάγνωση βλαβών, αντικατάσταση εξαρτημάτων και αναβαθμίσεις υπολογιστών και laptop.">Repair jobs for private clients: troubleshooting, replacing parts and upgrading computers and laptops.</li>
+                                <li data-en="Designing and building websites for clients." data-gr="Σχεδιασμός και κατασκευή ιστοσελίδων για πελάτες.">Designing and building websites for clients.</li>
+                            </ul>
+                            <div class="experience-tags">
+                                <span class="experience-tag" data-en="Freelance" data-gr="Freelance">Freelance</span>
+                                <span class="experience-tag" data-en="Computer Repair" data-gr="Επισκευή Υπολογιστών">Computer Repair</span>
+                                <span class="experience-tag" data-en="Upgrades" data-gr="Αναβαθμίσεις">Upgrades</span>
+                                <span class="experience-tag" data-en="Web Development" data-gr="Ανάπτυξη Ιστοσελίδων">Web Development</span>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -127,67 +239,67 @@
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="assets/battlesnake.jpg" alt="Battlesnake Project" loading="lazy">
+                            <img src="assets/battlesnake.jpg" alt="Battlesnake Project" width="384" height="240" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <h3 data-en="Battlesnake" data-gr="Battlesnake">Battlesnake</h3>
-                            <p data-en="An intelligent snake built for the Battlesnake platform. Implements pathfinding algorithms and strategic decision-making to compete against other snakes in multiplayer matches." data-gr="Ένα έξυπνο φιδι που δημιουργήθηκε για την πλατφόρμα Battlesnake. Υλοποιεί αλγόριθμους εύρεσης διαδρομής και στρατηγική λήψη αποφάσεων για να ανταγωνιστεί άλλα φίδια σε μάχες.">An intelligent snake built for the Battlesnake platform. Implements pathfinding algorithms and strategic decision-making to compete against other snakes in multiplayer matches.</p>
+                            <p data-en="An intelligent snake built for the Battlesnake platform. Implements pathfinding algorithms and strategic decision-making to compete against other snakes in multiplayer matches." data-gr="Ένα έξυπνο φίδι που δημιουργήθηκε για την πλατφόρμα Battlesnake. Υλοποιεί αλγόριθμους εύρεσης διαδρομής και στρατηγική λήψη αποφάσεων για να ανταγωνιστεί άλλα φίδια σε μάχες.">An intelligent snake built for the Battlesnake platform. Implements pathfinding algorithms and strategic decision-making to compete against other snakes in multiplayer matches.</p>
                             <div class="project-links">
-                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('battlesnake')" target="_blank" rel="noopener noreferrer">View Project</a>
+                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('battlesnake')">View Project</a>
                                 <a href="https://github.com/krisskash/SDIP_Battlesnake" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="assets/dronedrop.jpg" alt="DroneDrop Project" loading="lazy">
+                            <img src="assets/dronedrop.jpg" alt="DroneDrop Project" width="384" height="240" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <h3 data-en="DroneDrop" data-gr="DroneDrop">DroneDrop</h3>
                             <p data-en="An innovative drone delivery system that optimizes package delivery routes using advanced algorithms and real-time tracking for urban environments." data-gr="Ένα καινοτόμο σύστημα παράδοσης με drone που βελτιστοποιεί τις διαδρομές παράδοσης πακέτων χρησιμοποιώντας προηγμένους αλγόριθμους και παρακολούθηση σε πραγματικό χρόνο για αστικά περιβάλλοντα.">An innovative drone delivery system that optimizes package delivery routes using advanced algorithms and real-time tracking for urban environments.</p>
                             <div class="project-links">
-                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('dronedrop')" target="_blank" rel="noopener noreferrer">View Project</a>
+                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('dronedrop')">View Project</a>
                                 <a href="https://github.com/krisskash/DroneDrop" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="assets/ecodrop.jpg" alt="ecodrop³ Project" loading="lazy">
+                            <img src="assets/ecodrop.jpg" alt="ecodrop³ Project" width="384" height="240" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <h3 data-en="ecodrop³ - DIEM Hackathon 2025" data-gr="ecodrop³ - DIEM Hackathon 2025">ecodrop³ - DIEM Hackathon 2025</h3>
                             <p data-en="Blockchain-powered delivery service where each transaction is secured by a smart contract. Connects couriers, smart lockers, and gig workers for eco-friendly last-mile delivery in Athens. Features MetaMask authentication, smart contract escrow for every payment, 100+ real locker locations, and transparent crypto payments on Sepolia Testnet." data-gr="Υπηρεσία παράδοσης που βασίζεται σε blockchain όπου κάθε συναλλαγή ασφαλίζεται από ένα έξυπνο συμβόλαιο. Συνδέει κούριερ, έξυπνα ντουλάπια και gig workers για φιλική προς το περιβάλλον παράδοση last mile στην Αθήνα. Διαθέτει επαλήθευση MetaMask, έξυπνο συμβόλαιο εγγύησης για κάθε πληρωμή, 100+ πραγματικές τοποθεσίες ντουλαπιών και διαφανείς πληρωμές κρυπτονομισμάτων στο Sepolia Testnet.">Blockchain-powered delivery service where each transaction is secured by a smart contract. Connects couriers, smart lockers, and gig workers for eco-friendly last-mile delivery in Athens. Features MetaMask authentication, smart contract escrow for every payment, 100+ real locker locations, and transparent crypto payments on Sepolia Testnet.</p>
                             <div class="project-links">
-                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('ecodrop')" target="_blank" rel="noopener noreferrer">View Project</a>
+                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('ecodrop')">View Project</a>
                                 <a href="https://github.com/krisskash/DIEM_HACKATHON_2025" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="assets/teacherbuddy.jpg" alt="Teacher Buddy Project" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <img src="assets/teacherbuddy.jpg" alt="Teacher Buddy Project" width="384" height="240" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <div class="project-placeholder" style="display: none;">Teacher Buddy</div>
                         </div>
                         <div class="project-content">
                             <h3 data-en="Teacher Buddy" data-gr="Teacher Buddy">Teacher Buddy</h3>
                             <p data-en="An AI-powered web application that works as a co-teacher for educators. It uses Ollama to run the AI model locally and supports chat assistance, lesson planning, quizzes, rubrics, saved sessions, and admin analytics." data-gr="Μια AI-powered διαδικτυακή εφαρμογή που λειτουργεί ως βοηθός εκπαιδευτικού. Χρησιμοποιεί Ollama για να τρέχει το AI μοντέλο τοπικά και υποστηρίζει AI chat, σχεδιασμό μαθημάτων, quiz, rubrics, αποθηκευμένες συνομιλίες και admin analytics.">An AI-powered web application that works as a co-teacher for educators. It uses Ollama to run the AI model locally and supports chat assistance, lesson planning, quizzes, rubrics, saved sessions, and admin analytics.</p>
                             <div class="project-links">
-                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('teacherbuddy')" target="_blank" rel="noopener noreferrer">View Project</a>
+                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('teacherbuddy')">View Project</a>
                                 <a href="https://github.com/Athens-Tech-College/Industrial-Software-Project---Terminator-Team" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="assets/rogueblocks.jpg" alt="RogueBlocks Project" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <img src="assets/rogueblocks.jpg" alt="RogueBlocks Project" width="384" height="240" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <div class="project-placeholder" style="display: none;">RogueBlocks</div>
                         </div>
                         <div class="project-content">
                             <h3 data-en="RogueBlocks" data-gr="RogueBlocks">RogueBlocks</h3>
                             <p data-en="A compact Tetris-style arcade game built in Godot that combines classic falling-block gameplay with roguelite upgrades. Each run evolves through upgrade choices that affect scoring, gravity, clears, holds, and special board effects." data-gr="Ένα compact Tetris-style arcade game σε Godot που συνδυάζει κλασικό falling-block gameplay με roguelite upgrades. Κάθε run εξελίσσεται μέσα από επιλογές αναβαθμίσεων που επηρεάζουν score, gravity, clears, holds και ειδικά board effects.">A compact Tetris-style arcade game built in Godot that combines classic falling-block gameplay with roguelite upgrades. Each run evolves through upgrade choices that affect scoring, gravity, clears, holds, and special board effects.</p>
                             <div class="project-links">
-                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('rogueblocks')" target="_blank" rel="noopener noreferrer">View Project</a>
+                                <a href="#" class="project-link" data-en="View Project" data-gr="Δείτε το Έργο" onclick="openProjectModal('rogueblocks')">View Project</a>
                                 <a href="https://github.com/krisskash/GDAM_RogueBlocks" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
@@ -221,7 +333,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="modal-header">
-                <img id="modalGif" src="" alt="Project Demo" class="modal-gif">
+                <video id="modalGif" class="modal-gif" muted loop playsinline preload="none" aria-label="Project demo"></video>
             </div>
             <div class="modal-body">
                 <h2 id="modalTitle">Project Title</h2>
@@ -235,18 +347,18 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Christos Papafragkos. All rights reserved.
+            <p>&copy; <span id="footerYear">2026</span> Christos Papafragkos · <span lang="el">Χρήστος Παπαφράγκος</span>. All rights reserved.
             <br>Hosted on GitHub Pages 
             </p>
         </div>
-    </footer>    <script src="language.js"></script>
+    </footer>    <script src="language.js" defer></script>
     <script>
         // Project modal functionality
         const projectData = {
             battlesnake: {
                 title: "Battlesnake",
                 titleGr: "Battlesnake",
-                gif: "assets/battlesnake.gif", // Replace battlesnake.jpg with battlesnake.gif for animated demo
+                gif: "assets/battlesnake.mp4",
                 description: "An intelligent snake built for the Battlesnake platform. This project implements advanced pathfinding algorithms including A* search and strategic decision-making to compete against other snakes in real-time multiplayer matches. The algorithms consider multiple factors like food positioning, opponent behavior, and escape routes to maximize survival and growth.",
                 descriptionGr: "Ένα έξυπνο φίδι που δημιουργήθηκε για την πλατφόρμα Battlesnake. Αυτό το έργο υλοποιεί προηγμένους αλγόριθμους εύρεσης διαδρομής συμπεριλαμβανομένης της αναζήτησης A* και στρατηγικής λήψης αποφάσεων για να ανταγωνιστεί άλλα φίδια σε μάχες. Οι αλγόριθμοι εξετάζουν πολλαπλούς παράγοντες όπως η τοποθέτηση φαγητού, η συμπεριφορά των αντιπάλων και οι διαδρομές διαφυγής για να μεγιστοποιήσουν την επιβίωση και την ανάπτυξη.",
                 githubLink: "https://github.com/krisskash/SDIP_Battlesnake"
@@ -254,7 +366,7 @@
             dronedrop: {
                 title: "DroneDrop",
                 titleGr: "DroneDrop",
-                gif: "assets/dronedrop.gif", // Add dronedrop.gif for animated demo
+                gif: "assets/dronedrop.mp4",
                 description: "DroneDrop is a complete web application for a drone delivery service, similar to how you might order food delivery but using drones instead of conventional methods. The project demonstrates building a full website with both a server (backend) and user interface (frontend). Users can create accounts, browse products in an online shop, add items to their cart, place orders, and track their deliveries. The system also includes special admin pages for managing the business. The website is built using modern web technologies: Node.js and Express for the server that handles all the data and user requests, MongoDB as the database to store user information and orders, and Bootstrap to make the website look good on phones, tablets, and computers. The project also integrates the Google Maps API to display delivery locations and routes. The project is organized into two main parts - the server code that processes orders and user data, and the website pages that customers see and interact with. This shows how to build a complete online business platform from scratch.",
                 descriptionGr: "Το DroneDrop είναι μια ιστοσελίδα για υπηρεσία παράδοσης με drone, παρόμοια με το πώς μπορεί κάποιος να παραγγείλει φαγητό αλλά χρησιμοποιώντας drones αντί για κανονικά μέσα. Το έργο δείχνει πώς να δημιουργήσει κάποιος έναν πλήρη ιστότοπο με server (backend) και διεπαφή χρήστη (frontend). Οι χρήστες μπορούν να δημιουργούν λογαριασμούς, να περιηγούνται σε προϊόντα σε ένα online κατάστημα, να προσθέτουν στοιχεία στο καλάθι τους, να κάνουν παραγγελίες, και να παρακολουθούν τις παραδόσεις τους. Το σύστημα περιλαμβάνει επίσης ειδικές σελίδες διαχειριστή για τη διαχείριση της επιχείρησης. Ο ιστότοπος είναι δημιουργημένος χρησιμοποιώντας σύγχρονες τεχνολογίες ιστού: Node.js και Express για τον server που χειρίζεται όλα τα δεδομένα και τα αιτήματα χρηστών, MongoDB ως βάση δεδομένων για να αποθηκεύει πληροφορίες χρηστών και παραγγελίες, και Bootstrap για να κάνει τον ιστότοπο να φαίνεται καλά σε τηλέφωνα, tablets, και υπολογιστές. Το έργο ενσωματώνει επίσης το Google Maps API για την εμφάνιση τοποθεσιών και διαδρομών παράδοσης. Το έργο είναι οργανωμένο σε δύο κύρια μέρη - τον κώδικα του server που επεξεργάζεται παραγγελίες και δεδομένα χρηστών, και τις σελίδες του ιστότοπου που οι πελάτες βλέπουν και αλληλεπιδρούν. Αυτό δείχνει πώς να δημιουργήσει κάποιος μια πλήρη πλατφόρμα online επιχείρησης από την αρχή.",
                 githubLink: "https://github.com/krisskash/DroneDrop"
@@ -262,7 +374,7 @@
             ecodrop: {
                 title: "ecodrop³ - DIEM Hackathon 2025",
                 titleGr: "ecodrop³ - DIEM Hackathon 2025",
-                gif: "assets/ecodrop.gif",
+                gif: "assets/ecodrop.mp4",
                 description: "ecodrop³ is a blockchain-powered intermediate delivery platform built for the DIEM Hackathon 2025, where each transaction is executed through a smart contract on the Ethereum blockchain. The platform revolutionizes last-mile delivery by connecting couriers, smart lockers, and gig workers (Droppers) in Athens. Couriers deliver packages to 100+ real lockers, then Droppers pick them up and complete the final delivery to customers. Every payment is secured by a smart contract that acts as an escrow, ensuring funds are only released when delivery is confirmed. The platform features MetaMask authentication with Web3 wallet integration, automated smart contract execution for each transaction on Ethereum's Sepolia Testnet, real-time GPS tracking with Google Maps API integration, transparent crypto payments with QR codes, and a fair compensation model where Droppers earn 90% of delivery fees through smart contract distribution. Built with Node.js/Express backend, MongoDB database, vanilla JavaScript frontend, and Solidity smart contracts. The project demonstrates real-world blockchain application with 100+ verified locker locations scraped from Google Maps Places API, SHA256 encryption for customer privacy, and a complete job lifecycle system from creation to delivery confirmation. Technologies: HTML5, CSS3, JavaScript, Node.js, Express.js, MongoDB, Ethereum/Solidity, Web3/MetaMask, Google Maps API, Leaflet.js, QRCode.js, and ethers.js.",
                 descriptionGr: "Το ecodrop³ είναι μια πλατφόρμα ενδιάμεσης παράδοσης που βασίζεται σε blockchain και δημιουργήθηκε για το DIEM Hackathon 2025, όπου κάθε συναλλαγή εκτελείται μέσω ενός έξυπνου συμβολαίου στο blockchain του Ethereum. Η πλατφόρμα φέρνει επανάσταση στην παράδοση τελευταίου μιλίου συνδέοντας κούριερ, έξυπνα ντουλάπια και gig workers (Droppers) στην Αθήνα. Τα κούριερ παραδίδουν πακέτα σε 100+ ντουλάπια, στη συνέχεια οι Droppers τα παραλαμβάνουν και ολοκληρώνουν την τελική παράδοση στους πελάτες. Κάθε πληρωμή ασφαλίζεται από ένα έξυπνο συμβόλαιο που λειτουργεί ως εγγύηση, διασφαλίζοντας ότι τα κεφάλαια απελευθερώνονται μόνο όταν επιβεβαιωθεί η παράδοση. Η πλατφόρμα διαθέτει επαλήθευση MetaMask με ενσωμάτωση πορτοφολιού Web3, αυτοματοποιημένη εκτέλεση έξυπνου συμβολαίου για κάθε συναλλαγή στο Sepolia Testnet του Ethereum, παρακολούθηση GPS σε πραγματικό χρόνο με ενσωμάτωση Google Maps API, διαφανείς πληρωμές κρυπτονομισμάτων με κωδικούς QR, και ένα δίκαιο μοντέλο αποζημίωσης όπου οι Droppers κερδίζουν το 90% των τελών παράδοσης μέσω διανομής έξυπνου συμβολαίου. Δημιουργήθηκε με backend Node.js/Express, βάση δεδομένων MongoDB, frontend vanilla JavaScript και έξυπνα συμβόλαια Solidity. Το έργο επιδεικνύει πραγματική εφαρμογή blockchain με 100+ επαληθευμένες τοποθεσίες ντουλαπιών που συλλέγονται από το Google Maps Places API, κρυπτογράφηση SHA256 για προστασία προσωπικών δεδομένων πελατών, και ένα πλήρες σύστημα κύκλου ζωής εργασιών από τη δημιουργία έως την επιβεβαίωση παράδοσης. Τεχνολογίες: HTML5, CSS3, JavaScript, Node.js, Express.js, MongoDB, Ethereum/Solidity, Web3/MetaMask, Google Maps API, Leaflet.js, QRCode.js, και ethers.js.",
                 githubLink: "https://github.com/krisskash/DIEM_HACKATHON_2025"
@@ -270,7 +382,7 @@
             teacherbuddy: {
                 title: "Teacher Buddy",
                 titleGr: "Teacher Buddy",
-                gif: "assets/teacherbuddy.gif",
+                gif: "assets/teacherbuddy.mp4",
                 description: "Teacher Buddy is an AI-powered web application built as a co-teacher for educators. It uses Ollama to run the AI model locally, so the assistant can operate without relying on an external cloud AI service. It helps teachers with educational tasks through an AI chat assistant, lesson planning tools, quiz and assessment creation, persistent chat history, multiple chat sessions, and an admin dashboard for engagement and system analytics. The project includes secure authentication with JWT tokens, role-based access for admins and regular users, conversation context memory, and quick action buttons for common teaching tasks like creating differentiation strategies and defining learning objectives.",
                 descriptionGr: "Το Teacher Buddy είναι μια AI-powered διαδικτυακή εφαρμογή που δημιουργήθηκε ως βοηθός εκπαιδευτικού. Χρησιμοποιεί Ollama για να τρέχει το AI μοντέλο τοπικά, ώστε ο assistant να λειτουργεί χωρίς εξάρτηση από εξωτερική cloud AI υπηρεσία. Βοηθά τους καθηγητές σε εκπαιδευτικές εργασίες μέσω AI chat assistant, εργαλείων σχεδιασμού μαθημάτων, δημιουργίας quiz και αξιολογήσεων, μόνιμου ιστορικού συνομιλιών, πολλαπλών chat sessions και admin dashboard για engagement και analytics συστήματος. Το project περιλαμβάνει ασφαλές authentication με JWT tokens, role-based access για admins και regular users, conversation context memory και quick action buttons για συνηθισμένες εκπαιδευτικές εργασίες όπως differentiation strategies και learning objectives.",
                 githubLink: "https://github.com/Athens-Tech-College/Industrial-Software-Project---Terminator-Team"
@@ -278,7 +390,7 @@
             rogueblocks: {
                 title: "RogueBlocks",
                 titleGr: "RogueBlocks",
-                gif: "assets/rogueblocks.gif",
+                gif: "assets/rogueblocks.mp4",
                 description: "RogueBlocks is a compact Tetris-style arcade game built in Godot. It starts with familiar 10x20 falling-block gameplay and layers in roguelite upgrade drafting that changes how each run scores, clears, saves, and escalates. The game includes the seven standard tetromino pieces, next-piece preview, ghost piece, score and level tracking, upgrade progress, pause/settings menus, sound effects, custom-drawn visuals, particle effects, screen shake, and a Windows desktop export preset.",
                 descriptionGr: "Το RogueBlocks είναι ένα compact Tetris-style arcade game φτιαγμένο σε Godot. Ξεκινά με κλασικό 10x20 falling-block gameplay και προσθέτει roguelite upgrade drafting που αλλάζει τον τρόπο που κάθε run σκοράρει, καθαρίζει γραμμές, σώζει καταστάσεις και δυσκολεύει. Το παιχνίδι περιλαμβάνει τα επτά κλασικά tetromino pieces, next-piece preview, ghost piece, score και level tracking, upgrade progress, pause/settings menus, sound effects, custom-drawn visuals, particle effects, screen shake και Windows desktop export preset.",
                 githubLink: "https://github.com/krisskash/GDAM_RogueBlocks"
@@ -295,12 +407,14 @@
             // Update modal content
             const modalGif = document.getElementById('modalGif');
             if (project.gif) {
-                modalGif.src = project.gif;
                 modalGif.style.display = '';
                 modalGif.onerror = function() {
                     modalGif.removeAttribute('src');
                     modalGif.style.display = 'none';
                 };
+                modalGif.src = project.gif;
+                const playPromise = modalGif.play();
+                if (playPromise) playPromise.catch(function() {});
             } else {
                 modalGif.removeAttribute('src');
                 modalGif.style.display = 'none';
@@ -326,6 +440,10 @@
             const modal = document.getElementById('projectModal');
             modal.style.display = 'none';
             document.body.style.overflow = 'auto'; // Restore scrolling
+            const modalGif = document.getElementById('modalGif');
+            modalGif.pause();
+            modalGif.removeAttribute('src');
+            modalGif.load();
         }
 
         // Modal event listeners
@@ -351,7 +469,8 @@
             });
         });
     </script>
-    <script src="script.js"></script>
+    <script>document.getElementById('footerYear').textContent = new Date().getFullYear();</script>
+    <script src="script.js" defer></script>
     <script type="module" src="ps3waves.js"></script>
 </body>
 </html>
